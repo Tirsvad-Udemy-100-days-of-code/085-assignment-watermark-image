@@ -55,3 +55,39 @@ PREVIEW_MAX_SIZE: Final[tuple[int, int]] = (640, 480)
 
 ## @brief Quality of a saved JPEG file, from 1 to 100.
 JPEG_QUALITY: Final[int] = 92
+
+## @brief Pixel format used for every picture held in memory (Pillow mode name).
+PIXEL_MODE: Final[str] = "RGBA"
+
+## @brief Bytes one pixel takes in the PIXEL_MODE format (red, green, blue, alpha).
+BYTES_PER_PIXEL: Final[int] = 4
+
+## @brief Status line text before any picture is loaded.
+STATUS_EMPTY: Final[str] = "Upload an image to begin"
+
+## @brief Status line text after a picture is loaded; `{name}` is the file name.
+STATUS_LOADED: Final[str] = "Loaded {name}"
+
+## @brief Reason shown when a file cannot be read as a picture.
+ERROR_NOT_READABLE: Final[str] = "Not a readable image"
+
+## @brief Text in front of the message in the status line of the window.
+STATUS_LABEL_PREFIX: Final[str] = "Status: "
+
+## @brief Caption of the button that uploads a picture.
+UPLOAD_BUTTON_TEXT: Final[str] = "Upload image"
+
+## @brief Caption of the button that saves the watermarked picture.
+SAVE_BUTTON_TEXT: Final[str] = "Save image"
+
+## @brief Title of the dialog that asks for the picture file.
+OPEN_DIALOG_TITLE: Final[str] = "Upload image"
+
+## @brief Name of the file type group in the open dialog.
+IMAGE_FILES_LABEL: Final[str] = "Image files"
+
+## @brief Space between the widgets of the window, in pixels.
+PADDING: Final[int] = 8
+
+## @brief Background colour of the preview area, as a hex string.
+PREVIEW_BACKGROUND: Final[str] = "#e8e8e8"

@@ -2,6 +2,7 @@
 
 - [Home](Home)
 - [Setup](Setup)
+- [Step 1: upload](Step-1-Upload)
 
 **Languages**
 

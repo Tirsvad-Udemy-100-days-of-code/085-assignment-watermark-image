@@ -58,3 +58,26 @@ python_version = "3.13"
 strict = true
 mypy_path = "src"
 files = ["src", "tests", "docker"]
+
+[tool.importlinter]
+root_package = "watermark_image"
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "Layers point inward (ADR-0002)"
+type = "layers"
+layers = [
+    "watermark_image.infrastructure | watermark_image.presentation",
+    "watermark_image.application",
+    "watermark_image.domain",
+]
+# The composition root is the one place that names the view model it builds.
+ignore_imports = [
+    "watermark_image.infrastructure.composition -> watermark_image.presentation.main_view_model",
+]
+
+[[tool.importlinter.contracts]]
+name = "Domain and application use no picture or window library"
+type = "forbidden"
+source_modules = ["watermark_image.domain", "watermark_image.application"]
+forbidden_modules = ["PIL", "tkinter"]
