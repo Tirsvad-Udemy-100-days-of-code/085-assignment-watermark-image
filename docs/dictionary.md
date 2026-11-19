@@ -11,7 +11,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-023 | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-023 | [2a87378] |
 
 ---
 
@@ -49,3 +49,4 @@ The Product Owner's language is English (`en`) and the domain is `it`, as the [r
 [BC-001]: ./business-case.md
 [SA-001]: ./stakeholder-analysis.md
 [DM-002]: ./domain-model.md
+[2a87378]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/2a87378078601878cb390c2d31581159df822d6f

@@ -11,7 +11,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-020 | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-020 | [2a87378] |
 
 ---
 
@@ -87,3 +87,4 @@ LogoMark "0..*" -- "1" Picture : is drawn from >
 [SA-001]: ../../stakeholder-analysis.md
 [UC-001]: ./uc.md
 [UCD-001]: ../../use-case-diagram.md
+[2a87378]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/2a87378078601878cb390c2d31581159df822d6f

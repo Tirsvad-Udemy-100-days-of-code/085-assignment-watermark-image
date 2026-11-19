@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-024 | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-024 | [2a87378] |
 
 ---
 
@@ -83,3 +83,4 @@ Terms are the IT terms of [DICT-001]. The affected concepts are those of [DM-001
 [SSD-001]: ./ssd.md
 [DICT-001]: ../../dictionary.md
 [DM-001]: ./dm.md
+[2a87378]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/2a87378078601878cb390c2d31581159df822d6f

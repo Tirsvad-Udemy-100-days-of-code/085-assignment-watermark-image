@@ -12,7 +12,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-19 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [44b1b5e] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Actors renamed to User as in UCD-001; adds UCD-001 and UC-001 to CrossReference<br>Accepted on Go in RC-018 | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Actors renamed to User as in UCD-001; adds UCD-001 and UC-001 to CrossReference<br>Accepted on Go in RC-018 | [2a87378] |
 
 ---
 
@@ -131,3 +131,4 @@ Independent: US-001.01 is first; US-001.03 depends on US-001.02 and US-001.04 an
 [MIL-005]: ./milestones/mil-005-step-3-logo-watermark.md
 [MIL-006]: ./milestones/mil-006-step-4-save.md
 [44b1b5e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/44b1b5e31086612d7f3fdfb7e709507066247e4a
+[2a87378]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/2a87378078601878cb390c2d31581159df822d6f

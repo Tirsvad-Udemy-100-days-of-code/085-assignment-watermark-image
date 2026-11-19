@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Review record; mode autonomous, not independent | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Review record; mode autonomous, not independent | [2a87378] |
 
 ---
 
@@ -67,3 +67,4 @@ Go — every Mandatory criterion passes, including the language criteria confirm
 [UCD-001]: ../../use-case-diagram.md
 [QC-UCD-001]: ../../../framework/qc/artifacts/qc-use-case-diagram.md
 [QC-LANG-001]: ../../../framework/qc/artifacts/qc-language-domain.md
+[2a87378]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/2a87378078601878cb390c2d31581159df822d6f
