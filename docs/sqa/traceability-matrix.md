@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-19 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version | pending |
+| 2026-11-19 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version | [44b1b5e] |
 
 ---
 
@@ -91,3 +91,4 @@ Tracks backward and forward links between artifact instances so that the cross-a
 [RC-013]: reviews/rc-013-adr-0004-conventions.md
 [SA-001]: ../stakeholder-analysis.md
 [US-001]: ../user-stories.md
+[44b1b5e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/44b1b5e31086612d7f3fdfb7e709507066247e4a

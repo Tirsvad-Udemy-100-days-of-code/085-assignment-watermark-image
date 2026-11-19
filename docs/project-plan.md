@@ -11,7 +11,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-19 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-003 | pending |
+| 2026-11-19 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-003 | [44b1b5e] |
 
 ---
 
@@ -108,3 +108,4 @@ A No-Go at a gateway stops the later gateways. The gateway is reworked and decid
 [MIL-004]: ./milestones/mil-004-step-2-text-watermark.md
 [MIL-005]: ./milestones/mil-005-step-3-logo-watermark.md
 [MIL-006]: ./milestones/mil-006-step-4-save.md
+[44b1b5e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/44b1b5e31086612d7f3fdfb7e709507066247e4a

@@ -11,7 +11,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-19 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | pending |
+| 2026-11-19 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | [44b1b5e] |
 
 ---
 
@@ -127,3 +127,4 @@ Independent: US-001.01 is first; US-001.03 depends on US-001.02 and US-001.04 an
 [MIL-004]: ./milestones/mil-004-step-2-text-watermark.md
 [MIL-005]: ./milestones/mil-005-step-3-logo-watermark.md
 [MIL-006]: ./milestones/mil-006-step-4-save.md
+[44b1b5e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/44b1b5e31086612d7f3fdfb7e709507066247e4a
