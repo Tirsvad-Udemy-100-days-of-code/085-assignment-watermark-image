@@ -10,7 +10,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Rows for the gateway 2 design artifacts and their reviews; concerns CN-001, CN-004 and CN-009 covered | [2a87378] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the DCD delta reviews | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the DCD delta reviews | [05ac937] |
 
 ---
 
@@ -123,3 +123,4 @@ Tracks backward and forward links between artifact instances so that the cross-a
 [UC-001]: ../use-cases/uc-001/uc.md
 [UCD-001]: ../use-case-diagram.md
 [US-001]: ../user-stories.md
+[05ac937]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/05ac937057e51bc75db7351de9a9f6d67c274724
