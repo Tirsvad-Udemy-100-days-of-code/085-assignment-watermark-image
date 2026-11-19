@@ -9,8 +9,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the DCD delta reviews | [05ac937] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the gateway 4 DCD delta reviews | [a0915f0] |
+| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the gateway 4 DCD delta reviews | [a0915f0] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the gateway 5 DCD delta reviews | pending |
 
 ---
 
@@ -33,8 +33,8 @@ Tracks backward and forward links between artifact instances so that the cross-a
 | [SSD-001] | SSD | en | it | [UC-001] | [OC-001] | [RC-022] |
 | [OC-001] | OC | en | it | [SSD-001], [DM-001], [DICT-001] | [SD-001] | [RC-024] |
 | [SD-001] | SD | en | it | [OC-001] | [DCD-001] | [RC-025] |
-| [DCD-001] | DCD | en | it | [SD-001], [OC-001], [DM-002] | [DCD-002] | [RC-032] |
-| [DCD-002] | DCD | en | it | [DCD-001] | - | [RC-031] |
+| [DCD-001] | DCD | en | it | [SD-001], [OC-001], [DM-002] | [DCD-002] | [RC-035] |
+| [DCD-002] | DCD | en | it | [DCD-001] | - | [RC-034] |
 | [PP-001] | PP | en | it | [BC-001], [SA-001] | [MIL-001], [MIL-002], [MIL-003], [MIL-004], [MIL-005], [MIL-006] | [RC-003] |
 | [MIL-001] | MIL | en | it | [PP-001], [BC-001] | [MIL-002] | [RC-004] |
 | [MIL-002] | MIL | en | it | [MIL-001] | [MIL-003] | [RC-005] |
@@ -115,12 +115,11 @@ Tracks backward and forward links between artifact instances so that the cross-a
 [RC-023]: reviews/rc-023-dictionary.md
 [RC-024]: reviews/rc-024-oc-uc-001.md
 [RC-025]: reviews/rc-025-sd-uc-001.md
-[RC-031]: reviews/rc-031-dcd-project-delta-2.md
-[RC-032]: reviews/rc-032-dcd-uc-001-delta-2.md
+[RC-034]: reviews/rc-034-dcd-project-delta-3.md
+[RC-035]: reviews/rc-035-dcd-uc-001-delta-3.md
 [SA-001]: ../stakeholder-analysis.md
 [SD-001]: ../use-cases/uc-001/sd.md
 [SSD-001]: ../use-cases/uc-001/ssd.md
 [UC-001]: ../use-cases/uc-001/uc.md
 [UCD-001]: ../use-case-diagram.md
 [US-001]: ../user-stories.md
-[a0915f0]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/a0915f0a2784530fcfc408f2ec0b3c8e8bbb480d

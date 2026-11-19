@@ -9,8 +9,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 3: PreviewImage.scale_to_fit, MainView.window and refresh, composition root import<br>Accepted on Go in RC-029 | [05ac937] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 4: scale_to_fit result, has_watermark, margin rule, keyword request<br>Accepted on Go in RC-032 | [a0915f0] |
+| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 4: scale_to_fit result, has_watermark, margin rule, keyword request<br>Accepted on Go in RC-032 | [a0915f0] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 5: logo type and file in the view model<br>Accepted on Go in RC-035 | pending |
 
 ---
 
@@ -144,8 +144,11 @@ package "Presentation" #FADADD {
     +can_add : bool
     +can_save : bool
     +has_watermark : bool
+    +use_logo : bool
+    +logo_source : Path
     +upload_image(source : Path) : None
     +add_watermark(request : WatermarkRequest) : None
+    +choose_logo(path : Path) : None
     +save_image(target : Path) : None
   }
   class MainView {
@@ -220,7 +223,7 @@ Package dependencies: Presentation depends on Application and Domain; Infrastruc
 | ApplicationError and its four kinds | none (technical classes: error types) | Signal a refused operation | none | none |
 | PillowImageReader, PillowWatermarkRenderer, PillowImageWriter | none (technical classes: adapters) | Read, draw and write pictures with the picture library | none | `read`, `render`, `write` |
 | CompositionRoot | none (technical class) | Builds the objects and joins ports to adapters | none | `build_view_model` |
-| MainViewModel | none (technical class: view model) | Holds what the window shows and forwards the three operations | status, preview, can_add, can_save, has_watermark | `upload_image`, `add_watermark`, `save_image` |
+| MainViewModel | none (technical class: view model) | Holds what the window shows and forwards the three operations | status, preview, can_add, can_save, has_watermark, use_logo, logo_source | `upload_image`, `add_watermark`, `choose_logo`, `save_image` |
 | MainView | none (technical class: window) | Draws the window of the wireframe and forwards input | view_model, window | `refresh`, `run` |
 | PreviewImage | none (technical class: helper) | Turns an ImageView into a picture the window can draw, scaled to fit | none | `scale_to_fit`, `to_photo_image` |
 
@@ -235,7 +238,7 @@ SOLID is applied: each class has one responsibility, the use cases depend on por
 | `ImageReader.read(source)`, `PillowImageReader.read(source)` | SD-001 upload_image and add_watermark (logo) |
 | `Workspace.replace_image(image)` | SD-001 upload_image |
 | `Image` creation | SD-001 upload_image |
-| `MainViewModel.add_watermark(request)`, `AddWatermark.execute(request)` | OC-001 add_watermark |
+| `MainViewModel.add_watermark(request)`, `MainViewModel.choose_logo(path)`, `AddWatermark.execute(request)` | OC-001 add_watermark |
 | `Workspace.current_image()`, `Workspace.replace_marked(marked)` | SD-001 add_watermark |
 | `WatermarkRenderer.render(...)`, `PillowWatermarkRenderer.render(...)` | SD-001 add_watermark |
 | `MainViewModel.save_image(target)`, `SaveImage.execute(target)` | OC-001 save_image |
