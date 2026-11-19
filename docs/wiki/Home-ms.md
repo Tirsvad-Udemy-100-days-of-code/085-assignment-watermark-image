@@ -7,6 +7,7 @@ Aplikasi desktop kecil yang memuat naik imej, menambah watermark teks atau logo 
 | Halaman | Baca apabila anda mahu |
 | --- | --- |
 | [Persediaan](Setup-ms) | mencipta `.venv` setempat, memasang projek, menjalankan program dan ujian |
+| [Langkah 1: muat naik](Step-1-Upload-ms) | melihat tetingkap dan muat naik imej |
 
 Halaman langkah ditambah apabila setiap langkah siap.
 

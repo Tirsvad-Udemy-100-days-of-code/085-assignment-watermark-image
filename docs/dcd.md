@@ -9,7 +9,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-027 | [2a87378] |
+| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-027 | [2a87378] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 3: PreviewImage.scale_to_fit, MainView.window and refresh, composition root import<br>Accepted on Go in RC-028 | pending |
 
 ---
 
@@ -148,9 +149,12 @@ package "Presentation" #FADADD {
   }
   class MainView {
     -view_model : MainViewModel
+    +window : Tk
+    +refresh() : None
     +run() : None
   }
   class PreviewImage {
+    +scale_to_fit(view : ImageView) : ImageView
     +to_photo_image(view : ImageView) : PhotoImage
   }
 }
@@ -194,7 +198,7 @@ MainView ..> PreviewImage
 @enduml
 ```
 
-Package dependencies: Presentation depends on Application and Domain; Infrastructure depends on Application and Domain; Application depends on Domain; Domain depends on nothing. The ports are owned by the Application layer and implemented by the Infrastructure layer; the CompositionRoot is the only place where the two meet.
+Package dependencies: Presentation depends on Application and Domain; Infrastructure depends on Application and Domain; Application depends on Domain; Domain depends on nothing. The ports are owned by the Application layer and implemented by the Infrastructure layer; the CompositionRoot is the only place where the two meet, and the only Infrastructure class that names a Presentation class (it builds the MainViewModel); the import-linter contract allows exactly that one import.
 
 ## Class Table
 
@@ -216,8 +220,8 @@ Package dependencies: Presentation depends on Application and Domain; Infrastruc
 | PillowImageReader, PillowWatermarkRenderer, PillowImageWriter | none (technical classes: adapters) | Read, draw and write pictures with the picture library | none | `read`, `render`, `write` |
 | CompositionRoot | none (technical class) | Builds the objects and joins ports to adapters | none | `build_view_model` |
 | MainViewModel | none (technical class: view model) | Holds what the window shows and forwards the three operations | status, preview, can_add, can_save | `upload_image`, `add_watermark`, `save_image` |
-| MainView | none (technical class: window) | Draws the window of the wireframe and forwards input | view_model | `run` |
-| PreviewImage | none (technical class: helper) | Turns an ImageView into a picture the window can draw, scaled to fit | none | `to_photo_image` |
+| MainView | none (technical class: window) | Draws the window of the wireframe and forwards input | view_model, window | `refresh`, `run` |
+| PreviewImage | none (technical class: helper) | Turns an ImageView into a picture the window can draw, scaled to fit | none | `scale_to_fit`, `to_photo_image` |
 
 SOLID is applied: each class has one responsibility, the use cases depend on ports and not on adapters, and no class holds more than one reason to change.
 
@@ -237,7 +241,7 @@ SOLID is applied: each class has one responsibility, the use cases depend on por
 | `Workspace.current_marked()` | SD-001 save_image |
 | `Image.is_source(target)` | SD-001 save_image |
 | `ImageWriter.write(...)`, `PillowImageWriter.write(...)` | SD-001 save_image |
-| `PreviewImage.to_photo_image(view)`, `MainView.run()` | Wireframe of UC-001 (the screen of every operation) |
+| `PreviewImage.scale_to_fit(view)`, `PreviewImage.to_photo_image(view)`, `MainView.refresh()`, `MainView.run()` | Wireframe of UC-001 (the screen of every operation) |
 | `CompositionRoot.build_view_model()` | Technical: starts the program; no contract |
 
 ## Pattern Annotations

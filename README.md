@@ -8,6 +8,7 @@ A desktop application that uploads an image, adds a text or logo watermark and s
 - [Requirements](#-requirements)
 - [Setup](#-setup)
 - [Run](#-run)
+- [Step 1: upload](#-step-1-upload)
 - [Tests](#-tests)
 - [License](#-license)
 - [Links](#-links)
@@ -75,6 +76,14 @@ python -m watermark_image
 
 The program starts from step 1 on. The controls of each step are described in the wiki.
 
+## 🖼️ Step 1: upload
+
+The window has an **Upload image** button and a preview area. The wiki page [Step 1][wiki-step-1] explains what the step taught, in English, Danish and Bahasa Malaysia.
+
+| At start | After upload |
+| --- | --- |
+| ![Step 1: the empty window](./docs/screenshots/step-1-empty.png) | ![Step 1: the window with an uploaded image](./docs/screenshots/step-1-loaded.png) |
+
 ## 🧪 Tests
 
 With the environment active:
@@ -127,6 +136,7 @@ The documents a newcomer needs, in reading order.
 [repository]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image
 [documentation]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki
 [issues]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/issues
+[wiki-step-1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Step-1-Upload
 [license]: ./LICENSE
 [BC-001]: ./docs/business-case.md
 [SA-001]: ./docs/stakeholder-analysis.md

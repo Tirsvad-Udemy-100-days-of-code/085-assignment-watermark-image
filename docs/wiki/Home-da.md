@@ -7,6 +7,7 @@ Et lille desktopprogram, der uploader et billede, tilføjer et tekst- eller logo
 | Side | Læs den, når du vil |
 | --- | --- |
 | [Opsætning](Setup-da) | oprette et lokalt `.venv`, installere projektet og køre programmet og testene |
+| [Trin 1: upload](Step-1-Upload-da) | se vinduet og upload af billedet |
 
 Trinsiderne tilføjes, efterhånden som hvert trin er færdigt.
 
