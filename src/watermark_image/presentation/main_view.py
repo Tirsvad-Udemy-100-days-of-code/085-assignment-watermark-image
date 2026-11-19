@@ -44,7 +44,10 @@ class MainView:
         )
         self._upload_button.pack(side="left", pady=constants.PADDING)
         self._save_button = tkinter.Button(
-            toolbar, text=constants.SAVE_BUTTON_TEXT, state="disabled"
+            toolbar,
+            text=constants.SAVE_BUTTON_TEXT,
+            state="disabled",
+            command=self._on_save,
         )
         self._save_button.pack(side="left", padx=constants.PADDING)
 
@@ -318,4 +321,17 @@ class MainView:
         )
         if chosen:
             self._view_model.upload_image(Path(chosen))
+            self.refresh()
+
+    def _on_save(self) -> None:
+        chosen = filedialog.asksaveasfilename(
+            title=constants.SAVE_DIALOG_TITLE,
+            defaultextension=constants.DEFAULT_SAVE_EXTENSION,
+            filetypes=[
+                (constants.PNG_FILES_LABEL, "*.png"),
+                (constants.JPEG_FILES_LABEL, "*.jpg *.jpeg"),
+            ],
+        )
+        if chosen:
+            self._view_model.save_image(Path(chosen))
             self.refresh()

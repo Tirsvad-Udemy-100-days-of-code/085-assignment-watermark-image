@@ -13,3 +13,11 @@ class ImageReadError(ApplicationError):
 
 class NoImageError(ApplicationError):
     """@brief An operation needs a loaded Image and there is none."""
+
+
+class NoMarkedImageError(ApplicationError):
+    """@brief A save needs a WatermarkedImage and there is none."""
+
+
+class ImageWriteError(ApplicationError):
+    """@brief A picture file could not be written."""

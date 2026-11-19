@@ -40,6 +40,9 @@ step() {
 step "pytest"
 "$py" -m pytest -m "not gui" --cov --cov-report=term
 
+step "coverage of domain and application (at least 85%)"
+"$py" -m coverage report --include="src/watermark_image/domain/*,src/watermark_image/application/*" --fail-under=85
+
 step "ruff lint"
 "$py" -m ruff check .
 
