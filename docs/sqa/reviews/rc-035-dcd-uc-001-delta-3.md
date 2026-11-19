@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Review record; mode autonomous, not independent | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Review record; mode autonomous, not independent | [9ce52e1] |
 
 ---
 
@@ -55,3 +55,4 @@ Go — every Mandatory criterion passes, including the language criteria confirm
 [DCD-001]: ../../use-cases/uc-001/dcd.md
 [QC-DCD-001]: ../../../framework/qc/artifacts/qc-dcd.md
 [QC-LANG-001]: ../../../framework/qc/artifacts/qc-language-domain.md
+[9ce52e1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/9ce52e1b6c4feb3e16dad4630a7bfdd0cfe8eeef

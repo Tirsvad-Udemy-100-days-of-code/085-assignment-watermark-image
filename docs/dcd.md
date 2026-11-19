@@ -10,7 +10,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 4: scale_to_fit result, has_watermark, margin rule, keyword request<br>Accepted on Go in RC-031 | [a0915f0] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 5: logo type and file in the view model<br>Accepted on Go in RC-034 | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 5: logo type and file in the view model<br>Accepted on Go in RC-034 | [9ce52e1] |
 
 ---
 
@@ -277,3 +277,4 @@ No class or package depends on itself, directly or through others. Every depende
 [2a87378]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/2a87378078601878cb390c2d31581159df822d6f
 [05ac937]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/05ac937057e51bc75db7351de9a9f6d67c274724
 [a0915f0]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/a0915f0a2784530fcfc408f2ec0b3c8e8bbb480d
+[9ce52e1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/9ce52e1b6c4feb3e16dad4630a7bfdd0cfe8eeef
