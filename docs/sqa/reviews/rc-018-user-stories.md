@@ -1,0 +1,68 @@
+# Review Record: User Stories US-001
+
+## Metadata
+| Key | Value |
+| --- | --- |
+| ID | RC-018 |
+| CrossReference | [US-001], [QC-US-001], [QC-LANG-001] |
+
+## Version History
+| Date | Status | Author | Reviewer | Change | Commit |
+| --- | --- | --- | --- | --- | --- |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Review record; mode autonomous, not independent | pending |
+
+---
+
+## Artifact Under Review
+
+- Instance reviewed: [US-001]
+- Checklist used: [QC-US-001]
+- Scope: full review
+- Language and domain: en / it
+- Language reviewer: S01 (standing confirmation in chat on 2026-11-20)
+- Mode: autonomous, not independent (the reviewer is a stand-in for S01)
+
+## Checklist Results
+
+| # | Criterion | Status | Evidence/Notes |
+| --- | --- | --- | --- |
+| 1 | Follows INVEST criteria (Independent, Negotiable, Valuable, Estimable, Small, Testable) | Pass | INVEST check present with one stated exception |
+| 2 | Written in "As a / I want / So that" form | Pass | All stories use As a, I want, so that |
+| 3 | Clear, testable acceptance criteria are included | Pass | Given, when, then criteria for every story |
+| 4 | Traceable to a use case or epic | Pass | Each traces to a gateway and the use case UC-001 |
+| 5 | Story is sized to fit within a single iteration | Pass | Each story fits one gateway of one day |
+| 6 | Story statement avoids technical implementation detail | Pass | Stories avoid implementation detail; US-001.06 names the virtual environment because the Product Owner asked for it |
+| 7 | Role named in the story matches an actor defined in the Use Case Diagram | Pass | Every story names the actor User, which UCD-001 defines |
+| 8 | A story with more than one actor goal is split into use cases, one per actor goal, and each use case names the story it comes from | Pass | US-001.01 to US-001.05 are covered by one use case, UC-001; the others are plain tasks |
+| 9 | The story has a priority (MoSCoW: Must, Should, Could, Won't now) with the reason beside it | Pass | Each story has a MoSCoW priority with a reason |
+
+## Language and Domain Results
+
+| # | Criterion | Status | Evidence/Notes |
+| --- | --- | --- | --- |
+| 1 | The Metadata table has a `Language` row and a `Domain` row, and neither is a placeholder | Pass | Language and Domain rows are present and filled |
+| 2 | `Language` is a BCP 47 code and `Domain` is a value from the registry's domain list | Pass | Language en is a BCP 47 code; Domain it is in the registry list |
+| 3 | The content (prose and table cells) is written in the stated language | Pass | English throughout; S01 gave a standing confirmation in chat on 2026-11-20 and checks the wording of this document in the pull request |
+| 4 | The register matches the one the registry gives for the artifact type | Pass | Register IT Professional English as the registry gives for the type |
+| 5 | Domain terms are the PO terms of the domain's dictionary, with no synonyms | Pass | PO terms follow the use case and the domain dictionary DICT-001 is written in this gateway; terms follow it; S01 gave a standing confirmation in chat on 2026-11-20 and checks the wording of this document in the pull request |
+| 6 | Metadata keys, section headings, IDs and statuses are in English | Pass | Metadata keys, headings, IDs and statuses are English |
+| 7 | No translated twin (`<name>.<language>.md`) exists beside the document | Pass | No translated twin exists |
+| 8 | A change of language or domain since the previous accepted version has a Version History row and was reviewed again | Pass | No change of language since the first version |
+| 9 | A reviewer competent in the domain, and in the language, has confirmed that the domain terms are used correctly | Pass | Domain terms confirmed: S01 gave a standing confirmation in chat on 2026-11-20 and checks the wording of this document in the pull request |
+| 10 | Abbreviations are spelled out on first use, in the stated language | Pass | Abbreviations are spelled out on first use |
+
+## Overall Verdict
+
+Go — every Mandatory criterion passes, including the language criteria confirmed by S01; no action items
+
+## Action Items
+
+| Action | Owner | Due |
+| --- | --- | --- |
+| None | S01 | 2026-11-20 |
+
+---
+
+[US-001]: ../../user-stories.md
+[QC-US-001]: ../../../framework/qc/artifacts/qc-user-story.md
+[QC-LANG-001]: ../../../framework/qc/artifacts/qc-language-domain.md

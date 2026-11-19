@@ -4,14 +4,15 @@
 | Key | Value |
 | --- | --- |
 | ID | BC-001 |
-| CrossReference | [SA-001] |
+| CrossReference | [SA-001], [UCD-001] |
 | Language | en |
 | Domain | it |
 
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-19 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-001 | [44b1b5e] |
+| 2026-11-19 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-001 | [44b1b5e] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | CrossReference adds UCD-001 (metadata only)<br>Accepted on Go in RC-019 | pending |
 
 ---
 
@@ -158,6 +159,7 @@ Proceed — the scope is small and well bounded, the risks have mitigations, and
 
 ---
 
+[UCD-001]: use-case-diagram.md
 [SA-001]: ./stakeholder-analysis.md
 [S01]: ./stakeholder-analysis.md#stakeholder-summary-table
 [S02]: ./stakeholder-analysis.md#stakeholder-summary-table
