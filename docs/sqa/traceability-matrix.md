@@ -10,7 +10,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the gateway 5 DCD delta reviews | [9ce52e1] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the gateway 6 SD delta review | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the gateway 6 SD delta review | [1f65014] |
 
 ---
 
@@ -123,3 +123,4 @@ Tracks backward and forward links between artifact instances so that the cross-a
 [UC-001]: ../use-cases/uc-001/uc.md
 [UCD-001]: ../use-case-diagram.md
 [US-001]: ../user-stories.md
+[1f65014]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/1f65014ef092535eb0a994f618cc348d58dbd97a
