@@ -9,3 +9,7 @@ class ApplicationError(Exception):
 
 class ImageReadError(ApplicationError):
     """@brief A picture file could not be read."""
+
+
+class NoImageError(ApplicationError):
+    """@brief An operation needs a loaded Image and there is none."""

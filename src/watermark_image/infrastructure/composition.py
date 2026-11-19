@@ -2,9 +2,13 @@
 @brief The composition root: the one place that builds the adapters.
 """
 
+from watermark_image.application.add_watermark import AddWatermark
 from watermark_image.application.upload_image import UploadImage
 from watermark_image.application.workspace import Workspace
 from watermark_image.infrastructure.pillow_image_reader import PillowImageReader
+from watermark_image.infrastructure.pillow_watermark_renderer import (
+    PillowWatermarkRenderer,
+)
 from watermark_image.presentation.main_view_model import MainViewModel
 
 
@@ -18,4 +22,5 @@ class CompositionRoot:
         """
         workspace = Workspace()
         upload = UploadImage(PillowImageReader(), workspace)
-        return MainViewModel(upload)
+        add = AddWatermark(PillowWatermarkRenderer(), workspace)
+        return MainViewModel(upload, add)

@@ -7,12 +7,13 @@ import pytest
 from PIL import Image as PillowImage
 from PIL import ImageGrab
 
+from watermark_image.domain.anchor import Anchor
 from watermark_image.infrastructure.composition import CompositionRoot
 from watermark_image.presentation.main_view import MainView
 
 pytestmark = pytest.mark.gui
 
-SAMPLE_SIZE = (800, 500)
+SAMPLE_SIZE = (1200, 800)
 
 
 def make_gradient(path: Path) -> None:
@@ -43,7 +44,9 @@ def screenshot(view: MainView, name: str) -> Path:
     return target
 
 
-def test_main_view_shows_the_empty_and_the_loaded_state(tmp_path: Path) -> None:
+def test_main_view_shows_the_empty_the_loaded_and_the_watermarked_state(
+    tmp_path: Path,
+) -> None:
     sample = tmp_path / "gradient.png"
     make_gradient(sample)
     view_model = CompositionRoot().build_view_model()
@@ -56,5 +59,17 @@ def test_main_view_shows_the_empty_and_the_loaded_state(tmp_path: Path) -> None:
         view.refresh()
         assert screenshot(view, "step-1-loaded.png").exists()
         assert view_model.status == "Loaded gradient.png"
+
+        view._text.set("Sample watermark")
+        view._size.set("64")
+        view._colour.set("#ffffff")
+        view._add_button.invoke()
+        assert view_model.status == "Text watermark added"
+        assert screenshot(view, "step-2-text.png").exists()
+
+        view._place_buttons[Anchor.BOTTOM_RIGHT].invoke()
+        view._opacity.set(70)
+        assert view_model.status == "Text watermark added"
+        assert screenshot(view, "step-2-placed.png").exists()
     finally:
         view.window.destroy()
