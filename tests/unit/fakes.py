@@ -8,6 +8,7 @@ from watermark_image import constants
 from watermark_image.application.watermark_request import WatermarkRequest
 from watermark_image.domain.anchor import Anchor
 from watermark_image.domain.image import Image
+from watermark_image.domain.logo_watermark import LogoWatermark
 from watermark_image.domain.position import Position
 from watermark_image.domain.text_watermark import TextWatermark
 from watermark_image.domain.watermark import Watermark
@@ -30,6 +31,10 @@ class FakeImageReader:
         self._image = image
         self._error = error
         self.read_sources: list[Path] = []
+
+    def fail_with(self, error: Exception) -> None:
+        """@brief Make every later read raise the error."""
+        self._error = error
 
     def read(self, source: Path) -> Image:
         """@brief Record the call and return the prepared Image or raise."""
@@ -57,6 +62,35 @@ def make_request(
     """@brief Build a WatermarkRequest for a text watermark."""
     return WatermarkRequest(
         text=text, font_size=font_size, colour=colour, anchor=anchor, opacity=opacity
+    )
+
+
+def make_logo_watermark(
+    scale_percent: int = 25, opacity: int = 50, width: int = 2, height: int = 2
+) -> LogoWatermark:
+    """@brief Build a valid LogoWatermark."""
+    return LogoWatermark(
+        opacity=opacity,
+        logo=make_image("logo.png", width, height),
+        scale_percent=scale_percent,
+    )
+
+
+def make_logo_request(
+    logo_source: str = "logo.png",
+    logo_scale_percent: int = 25,
+    anchor: Anchor = Anchor.CENTER,
+    opacity: int = 50,
+) -> WatermarkRequest:
+    """@brief Build a WatermarkRequest for a logo watermark."""
+    return WatermarkRequest(
+        text="",
+        font_size=12,
+        colour="#ffffff",
+        logo_source=Path(logo_source),
+        logo_scale_percent=logo_scale_percent,
+        anchor=anchor,
+        opacity=opacity,
     )
 
 

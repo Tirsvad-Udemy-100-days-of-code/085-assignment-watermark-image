@@ -25,6 +25,8 @@ class MainViewModel:
         self._upload = upload
         self._add = add
         self.has_watermark: bool = False
+        self.use_logo: bool = False
+        self.logo_source: Path | None = None
         self.status: str = constants.STATUS_EMPTY
         self.preview: ImageView | None = None
 
@@ -51,16 +53,31 @@ class MainViewModel:
             self.has_watermark = False
             self.status = constants.STATUS_LOADED.format(name=source.name)
 
+    def choose_logo(self, source: Path) -> None:
+        """@brief Remember the logo file to use for a logo watermark.
+
+        @param source The logo file; it is read when the watermark is added.
+        """
+        self.logo_source = source
+
     def add_watermark(self, request: WatermarkRequest) -> None:
         """@brief Add a watermark; a refusal goes to the status line.
 
-        @param request What the user chose; the preview and the earlier
-            watermark stay as they were when it is refused.
+        @param request What the user chose; a request with a logo source makes
+            a logo watermark. The preview and the earlier watermark stay as they
+            were when it is refused.
         """
+        if self.use_logo and request.logo_source is None:
+            self.status = constants.ERROR_NO_LOGO
+            return
         try:
             self.preview = self._add.execute(request)
-        except (InvalidWatermarkError, NoImageError) as error:
+        except (InvalidWatermarkError, NoImageError, ImageReadError) as error:
             self.status = str(error)
         else:
             self.has_watermark = True
-            self.status = constants.STATUS_TEXT_ADDED
+            self.status = (
+                constants.STATUS_TEXT_ADDED
+                if request.logo_source is None
+                else constants.STATUS_LOGO_ADDED
+            )

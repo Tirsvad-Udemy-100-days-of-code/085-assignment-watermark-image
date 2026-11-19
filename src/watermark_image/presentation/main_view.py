@@ -29,7 +29,9 @@ class MainView:
         self._photo: ImageTk.PhotoImage | None = None
         self._anchor = Anchor.CENTER
         self._place_buttons: dict[Anchor, tkinter.Button] = {}
-        self._controls: list[tkinter.Widget] = []
+        self._common_controls: list[tkinter.Widget] = []
+        self._text_controls: list[tkinter.Widget] = []
+        self._logo_controls: list[tkinter.Widget] = []
 
         self.window = tkinter.Tk()
         self.window.title(constants.APP_NAME)
@@ -84,10 +86,25 @@ class MainView:
         self._status_label.configure(
             text=constants.STATUS_LABEL_PREFIX + self._view_model.status
         )
-        controls_state = "normal" if self._view_model.can_add else "disabled"
-        for control in self._controls:
-            control["state"] = controls_state
+        self._set_states()
+        self._logo_name.set(
+            constants.NO_LOGO_TEXT
+            if self._view_model.logo_source is None
+            else self._view_model.logo_source.name
+        )
         self._show_selected_place()
+
+    def _set_states(self) -> None:
+        enabled = self._view_model.can_add
+        using_logo = self._view_model.use_logo
+        groups = (
+            (self._common_controls, enabled),
+            (self._text_controls, enabled and not using_logo),
+            (self._logo_controls, enabled and using_logo),
+        )
+        for controls, active in groups:
+            for control in controls:
+                control["state"] = "normal" if active else "disabled"
 
     def run(self) -> None:
         """@brief Show the window and handle input until it is closed."""
@@ -105,22 +122,13 @@ class MainView:
         self._type = tkinter.StringVar(value=constants.TYPE_TEXT_LABEL)
         types = tkinter.Frame(panel)
         types.grid(row=row, column=0, columnspan=2, sticky="w")
-        text_type = tkinter.Radiobutton(
-            types,
-            text=constants.TYPE_TEXT_LABEL,
-            variable=self._type,
-            value=constants.TYPE_TEXT_LABEL,
-        )
-        text_type.pack(side="left")
-        self._controls.append(text_type)
-        # The logo type exists in the layout; it works from step 3 and stays off.
-        tkinter.Radiobutton(
-            types,
-            text=constants.TYPE_LOGO_LABEL,
-            variable=self._type,
-            value=constants.TYPE_LOGO_LABEL,
-            state="disabled",
-        ).pack(side="left")
+        for caption in (constants.TYPE_TEXT_LABEL, constants.TYPE_LOGO_LABEL):
+            radio = tkinter.Radiobutton(
+                types, text=caption, variable=self._type, value=caption
+            )
+            radio.pack(side="left")
+            self._common_controls.append(radio)
+        self._type.trace_add("write", self._on_type_changed)
         row += 1
 
         self._text = tkinter.StringVar(value=constants.DEFAULT_TEXT)
@@ -129,6 +137,7 @@ class MainView:
             row,
             constants.TEXT_LABEL,
             tkinter.Entry(panel, textvariable=self._text, width=constants.ENTRY_WIDTH),
+            self._text_controls,
         )
         row += 1
 
@@ -144,6 +153,7 @@ class MainView:
                 textvariable=self._size,
                 width=constants.ENTRY_WIDTH,
             ),
+            self._text_controls,
         )
         row += 1
 
@@ -155,6 +165,33 @@ class MainView:
             tkinter.Entry(
                 panel, textvariable=self._colour, width=constants.ENTRY_WIDTH
             ),
+            self._text_controls,
+        )
+        row += 1
+
+        self._logo_name = tkinter.StringVar(value=constants.NO_LOGO_TEXT)
+        logo = tkinter.Frame(panel)
+        choose = tkinter.Button(
+            logo, text=constants.CHOOSE_LOGO_BUTTON_TEXT, command=self._on_choose_logo
+        )
+        choose.pack(side="left")
+        tkinter.Label(logo, textvariable=self._logo_name).pack(
+            side="left", padx=constants.PADDING
+        )
+        self._logo_controls.append(choose)
+        self._add_row(panel, row, constants.LOGO_LABEL, logo, self._logo_controls)
+        row += 1
+
+        self._scale = tkinter.Scale(
+            panel,
+            from_=constants.MIN_LOGO_SCALE,
+            to=constants.MAX_LOGO_SCALE,
+            orient="horizontal",
+            command=self._on_control_changed,
+        )
+        self._scale.set(constants.DEFAULT_LOGO_SCALE)
+        self._add_row(
+            panel, row, constants.SCALE_LABEL, self._scale, self._logo_controls
         )
         row += 1
 
@@ -172,8 +209,8 @@ class MainView:
             line, column = divmod(index, constants.PLACE_GRID_COLUMNS)
             button.grid(row=line, column=column)
             self._place_buttons[anchor] = button
-            self._controls.append(button)
-        self._add_row(panel, row, constants.PLACE_LABEL, places)
+            self._common_controls.append(button)
+        self._add_row(panel, row, constants.PLACE_LABEL, places, self._common_controls)
         row += 1
 
         self._opacity = tkinter.Scale(
@@ -184,24 +221,31 @@ class MainView:
             command=self._on_control_changed,
         )
         self._opacity.set(constants.DEFAULT_OPACITY)
-        self._add_row(panel, row, constants.OPACITY_LABEL, self._opacity)
+        self._add_row(
+            panel, row, constants.OPACITY_LABEL, self._opacity, self._common_controls
+        )
         row += 1
 
         self._add_button = tkinter.Button(
             panel, text=constants.ADD_BUTTON_TEXT, command=self._on_add
         )
         self._add_button.grid(row=row, column=0, columnspan=2, pady=constants.PADDING)
-        self._controls.append(self._add_button)
+        self._common_controls.append(self._add_button)
 
     def _add_row(
-        self, panel: tkinter.Frame, row: int, caption: str, widget: tkinter.Widget
+        self,
+        panel: tkinter.Frame,
+        row: int,
+        caption: str,
+        widget: tkinter.Widget,
+        group: list[tkinter.Widget],
     ) -> None:
         tkinter.Label(panel, text=caption, anchor="w").grid(
             row=row, column=0, sticky="w"
         )
         widget.grid(row=row, column=1, sticky="w", pady=2)
         if not isinstance(widget, tkinter.Frame):
-            self._controls.append(widget)
+            group.append(widget)
 
     def _place_command(self, anchor: Anchor) -> Callable[[], None]:
         return lambda: self._on_place(anchor)
@@ -216,7 +260,12 @@ class MainView:
             )
 
     def _read_request(self) -> WatermarkRequest:
+        logo_source = (
+            self._view_model.logo_source if self._view_model.use_logo else None
+        )
         return WatermarkRequest(
+            logo_source=logo_source,
+            logo_scale_percent=int(self._scale.get()),
             text=self._text.get(),
             font_size=self._to_int(self._size.get()),
             colour=self._colour.get(),
@@ -240,6 +289,22 @@ class MainView:
     def _on_add(self) -> None:
         self._view_model.add_watermark(self._read_request())
         self.refresh()
+
+    def _on_type_changed(self, *_ignored: str) -> None:
+        self._view_model.use_logo = self._type.get() == constants.TYPE_LOGO_LABEL
+        self.refresh()
+        self._on_control_changed()
+
+    def _on_choose_logo(self) -> None:
+        extensions = " ".join(f"*{ext}" for ext in constants.SUPPORTED_READ_EXTENSIONS)
+        chosen = filedialog.askopenfilename(
+            title=constants.LOGO_DIALOG_TITLE,
+            filetypes=[(constants.IMAGE_FILES_LABEL, extensions)],
+        )
+        if chosen:
+            self._view_model.choose_logo(Path(chosen))
+            self._on_control_changed()
+            self.refresh()
 
     def _on_control_changed(self, *_ignored: str) -> None:
         if self._view_model.has_watermark:

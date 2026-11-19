@@ -8,6 +8,7 @@ from tests.unit.fakes import (
     FakeImageReader,
     FakeWatermarkRenderer,
     make_image,
+    make_logo_request,
     make_request,
 )
 from watermark_image.application.add_watermark import AddWatermark
@@ -21,7 +22,7 @@ def make_view_model(reader: FakeImageReader) -> MainViewModel:
     workspace = Workspace()
     return MainViewModel(
         UploadImage(reader, workspace),
-        AddWatermark(FakeWatermarkRenderer(), workspace),
+        AddWatermark(reader, FakeWatermarkRenderer(), workspace),
     )
 
 
@@ -121,4 +122,50 @@ def test_upload_after_a_watermark_clears_the_watermark_flag() -> None:
     view_model = loaded_view_model()
     view_model.add_watermark(make_request())
     view_model.upload_image(Path("b.png"))
+    assert not view_model.has_watermark
+
+
+def test_add_logo_watermark_shows_the_marked_picture() -> None:
+    view_model = loaded_view_model()
+    plain = view_model.preview
+    view_model.use_logo = True
+    view_model.add_watermark(make_logo_request())
+    assert view_model.status == "Logo watermark added"
+    assert view_model.preview != plain
+    assert view_model.has_watermark
+
+
+def test_choose_logo_remembers_the_file() -> None:
+    view_model = loaded_view_model()
+    assert view_model.logo_source is None
+    view_model.choose_logo(Path("emblem.png"))
+    assert view_model.logo_source == Path("emblem.png")
+
+
+def test_logo_type_without_a_logo_asks_for_one() -> None:
+    view_model = loaded_view_model()
+    view_model.use_logo = True
+    view_model.add_watermark(make_request())
+    assert view_model.status == "Choose a logo first"
+    assert not view_model.has_watermark
+
+
+def test_unreadable_logo_shows_the_reason_and_keeps_the_preview() -> None:
+    reader = FakeImageReader(make_image(width=4, height=2))
+    view_model = make_view_model(reader)
+    view_model.upload_image(Path("a.png"))
+    view_model.add_watermark(make_request())
+    marked = view_model.preview
+    reader.fail_with(ImageReadError("Not a readable image"))
+    view_model.use_logo = True
+    view_model.add_watermark(make_logo_request("bad.png"))
+    assert view_model.status == "Not a readable image"
+    assert view_model.preview is marked
+
+
+def test_invalid_logo_scale_shows_the_reason() -> None:
+    view_model = loaded_view_model()
+    view_model.use_logo = True
+    view_model.add_watermark(make_logo_request(logo_scale_percent=101))
+    assert view_model.status == "The logo scale must be from 1 to 100 percent"
     assert not view_model.has_watermark

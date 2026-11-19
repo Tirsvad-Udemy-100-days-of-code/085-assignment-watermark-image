@@ -21,6 +21,7 @@ class CompositionRoot:
         @return A view model ready for the window.
         """
         workspace = Workspace()
-        upload = UploadImage(PillowImageReader(), workspace)
-        add = AddWatermark(PillowWatermarkRenderer(), workspace)
+        reader = PillowImageReader()
+        upload = UploadImage(reader, workspace)
+        add = AddWatermark(reader, PillowWatermarkRenderer(), workspace)
         return MainViewModel(upload, add)

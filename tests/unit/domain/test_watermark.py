@@ -1,11 +1,11 @@
-"""Tests of Anchor, Position, TextWatermark and WatermarkedImage."""
+"""Tests of Anchor, Position, TextWatermark, LogoWatermark and WatermarkedImage."""
 
 import dataclasses
 from pathlib import Path
 
 import pytest
 
-from tests.unit.fakes import make_image, make_text_watermark
+from tests.unit.fakes import make_image, make_logo_watermark, make_text_watermark
 from watermark_image.domain.anchor import Anchor
 from watermark_image.domain.errors import DomainError, InvalidWatermarkError
 from watermark_image.domain.position import Position
@@ -135,3 +135,36 @@ def test_watermarked_image_refuses_a_size_below_one(width: int, height: int) -> 
 
 def test_smallest_watermarked_image_is_accepted() -> None:
     assert _marked(1, 1, 4).width == 1
+
+
+def test_logo_watermark_holds_its_values() -> None:
+    mark = make_logo_watermark(scale_percent=30, opacity=70)
+    assert (mark.scale_percent, mark.opacity, mark.logo.source) == (
+        30,
+        70,
+        Path("logo.png"),
+    )
+
+
+def test_logo_watermark_is_a_watermark_and_immutable() -> None:
+    mark = make_logo_watermark()
+    assert isinstance(mark, Watermark)
+    with pytest.raises(dataclasses.FrozenInstanceError):
+        mark.scale_percent = 5  # type: ignore[misc]
+
+
+@pytest.mark.parametrize("scale", [1, 2, 99, 100])
+def test_logo_watermark_accepts_a_scale_inside_the_limits(scale: int) -> None:
+    assert make_logo_watermark(scale_percent=scale).scale_percent == scale
+
+
+@pytest.mark.parametrize("scale", [-1, 0, 101])
+def test_logo_watermark_refuses_a_scale_outside_the_limits(scale: int) -> None:
+    with pytest.raises(InvalidWatermarkError):
+        make_logo_watermark(scale_percent=scale)
+
+
+@pytest.mark.parametrize("opacity", [-1, 101])
+def test_logo_watermark_refuses_opacity_outside_the_limits(opacity: int) -> None:
+    with pytest.raises(InvalidWatermarkError):
+        make_logo_watermark(opacity=opacity)
