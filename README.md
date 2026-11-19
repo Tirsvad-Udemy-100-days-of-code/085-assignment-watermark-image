@@ -9,6 +9,7 @@ A desktop application that uploads an image, adds a text or logo watermark and s
 - [Setup](#-setup)
 - [Run](#-run)
 - [Step 1: upload](#-step-1-upload)
+- [Step 2: text watermark](#-step-2-text-watermark)
 - [Tests](#-tests)
 - [License](#-license)
 - [Links](#-links)
@@ -84,6 +85,14 @@ The window has an **Upload image** button and a preview area. The wiki page [Ste
 | --- | --- |
 | ![Step 1: the empty window](./docs/screenshots/step-1-empty.png) | ![Step 1: the window with an uploaded image](./docs/screenshots/step-1-loaded.png) |
 
+## 🖋️ Step 2: text watermark
+
+The control panel on the right takes a text, a size, a colour, one of nine places and an opacity; **Add watermark** lays the text over the picture and the original stays unchanged. The wiki page [Step 2][wiki-step-2] explains what the step taught, in English, Danish and Bahasa Malaysia.
+
+| Text added | Placed in a corner |
+| --- | --- |
+| ![Step 2: a text watermark](./docs/screenshots/step-2-text.png) | ![Step 2: the watermark placed in a corner](./docs/screenshots/step-2-placed.png) |
+
 ## 🧪 Tests
 
 With the environment active:
@@ -137,6 +146,7 @@ The documents a newcomer needs, in reading order.
 [documentation]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki
 [issues]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/issues
 [wiki-step-1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Step-1-Upload
+[wiki-step-2]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Step-2-Text-Watermark
 [license]: ./LICENSE
 [BC-001]: ./docs/business-case.md
 [SA-001]: ./docs/stakeholder-analysis.md

@@ -8,6 +8,7 @@ A small desktop application that uploads an image, adds a text or logo watermark
 | --- | --- |
 | [Setup](Setup) | create a local `.venv`, install the project, run the program and the tests |
 | [Step 1: upload](Step-1-Upload) | see the window and the image upload |
+| [Step 2: text watermark](Step-2-Text-Watermark) | add a text watermark with place and opacity |
 
 The step pages are added as each step is finished.
 
