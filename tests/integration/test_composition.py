@@ -56,3 +56,55 @@ def test_built_view_model_refuses_an_empty_text(tmp_path: Path) -> None:
     )
     assert view_model.status == "The text must not be empty"
     assert view_model.preview is plain
+
+
+def test_built_view_model_adds_a_logo_watermark_from_real_files(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "pic.png"
+    logo = tmp_path / "logo.png"
+    PillowImage.new("RGB", (200, 100)).save(path)
+    PillowImage.new("RGBA", (20, 20), (255, 0, 0, 255)).save(logo)
+    original_bytes = path.read_bytes()
+    view_model = CompositionRoot().build_view_model()
+    view_model.upload_image(path)
+    view_model.use_logo = True
+    view_model.add_watermark(
+        WatermarkRequest(
+            text="",
+            font_size=12,
+            colour="#ffffff",
+            logo_source=logo,
+            logo_scale_percent=10,
+            anchor=Anchor.TOP_LEFT,
+            opacity=100,
+        )
+    )
+    assert view_model.status == "Logo watermark added"
+    assert view_model.preview is not None
+    start = (16 * 200 + 16) * 4
+    assert view_model.preview.pixels[start : start + 4] == bytes([255, 0, 0, 255])
+    assert path.read_bytes() == original_bytes
+
+
+def test_built_view_model_refuses_an_unreadable_logo(tmp_path: Path) -> None:
+    path = tmp_path / "pic.png"
+    logo = tmp_path / "logo.png"
+    PillowImage.new("RGB", (20, 10)).save(path)
+    logo.write_bytes(b"not a picture")
+    view_model = CompositionRoot().build_view_model()
+    view_model.upload_image(path)
+    plain = view_model.preview
+    view_model.use_logo = True
+    view_model.add_watermark(
+        WatermarkRequest(
+            text="",
+            font_size=12,
+            colour="#ffffff",
+            logo_source=logo,
+            anchor=Anchor.CENTER,
+            opacity=50,
+        )
+    )
+    assert view_model.status == "Not a readable image"
+    assert view_model.preview is plain

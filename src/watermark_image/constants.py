@@ -116,7 +116,7 @@ TYPE_LABEL: Final[str] = "Watermark type"
 ## @brief Caption of the text watermark type.
 TYPE_TEXT_LABEL: Final[str] = "Text"
 
-## @brief Caption of the logo watermark type (not active before step 3).
+## @brief Caption of the logo watermark type.
 TYPE_LOGO_LABEL: Final[str] = "Logo"
 
 ## @brief Caption of the text entry.
@@ -155,3 +155,24 @@ PLACE_SELECTED_BACKGROUND: Final[str] = "#7fb2ff"
 
 ## @brief Number of place buttons in one row of the grid.
 PLACE_GRID_COLUMNS: Final[int] = 3
+
+## @brief Status line text after a logo watermark is added.
+STATUS_LOGO_ADDED: Final[str] = "Logo watermark added"
+
+## @brief Reason shown when a logo watermark is added before a logo is chosen.
+ERROR_NO_LOGO: Final[str] = "Choose a logo first"
+
+## @brief Caption of the logo choice.
+LOGO_LABEL: Final[str] = "Logo:"
+
+## @brief Caption of the button that chooses the logo file.
+CHOOSE_LOGO_BUTTON_TEXT: Final[str] = "Choose logo"
+
+## @brief Text next to the logo button before a logo is chosen.
+NO_LOGO_TEXT: Final[str] = "No logo chosen"
+
+## @brief Title of the dialog that asks for the logo file.
+LOGO_DIALOG_TITLE: Final[str] = "Choose logo"
+
+## @brief Caption of the logo scale control.
+SCALE_LABEL: Final[str] = "Scale:"

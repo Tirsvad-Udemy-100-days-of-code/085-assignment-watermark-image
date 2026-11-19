@@ -9,6 +9,7 @@ from watermark_image import constants
 from watermark_image.domain.anchor import Anchor
 from watermark_image.domain.errors import InvalidWatermarkError
 from watermark_image.domain.image import Image
+from watermark_image.domain.logo_watermark import LogoWatermark
 from watermark_image.domain.position import Position
 from watermark_image.domain.text_watermark import TextWatermark
 from watermark_image.domain.watermark import Watermark
@@ -22,30 +23,33 @@ _FULL_ALPHA = 255
 
 
 class PillowWatermarkRenderer:
-    """@brief Implements the WatermarkRenderer port for text watermarks."""
+    """@brief Implements the WatermarkRenderer port for text and logo watermarks."""
 
     def render(
         self, image: Image, watermark: Watermark, position: Position
     ) -> WatermarkedImage:
-        """@brief Draw the text on a transparent layer and blend it onto a copy.
+        """@brief Draw the mark on a transparent layer and blend it onto a copy.
 
         @param image The picture; it is never modified.
-        @param watermark The text watermark to draw.
+        @param watermark The text or logo watermark to draw.
         @param position Where to draw it.
         @return The new picture with the watermark.
-        @throws InvalidWatermarkError when the watermark is not a text or the
-            text cannot be drawn.
+        @throws InvalidWatermarkError when the watermark is neither a text nor
+            a logo, or it cannot be drawn.
         """
-        if not isinstance(watermark, TextWatermark):
-            raise InvalidWatermarkError("Only a text watermark can be drawn")
+        if not isinstance(watermark, TextWatermark | LogoWatermark):
+            raise InvalidWatermarkError("Only a text or logo watermark can be drawn")
         try:
             size = (image.width, image.height)
             base = PillowImage.frombytes(constants.PIXEL_MODE, size, image.pixels)
-            layer = self._draw_text(size, watermark, position)
+            if isinstance(watermark, TextWatermark):
+                layer = self._draw_text(size, watermark, position)
+            else:
+                layer = self._draw_logo(size, watermark, position)
             blended = PillowImage.alpha_composite(base, layer)
             pixels = blended.tobytes()
         except (OSError, ValueError, MemoryError) as error:
-            raise InvalidWatermarkError("The text cannot be drawn") from error
+            raise InvalidWatermarkError("The watermark cannot be drawn") from error
         return WatermarkedImage(
             image, watermark, position, image.width, image.height, pixels
         )
@@ -61,20 +65,7 @@ class PillowWatermarkRenderer:
         left, top, right, bottom = (
             round(edge) for edge in draw.textbbox((0, 0), watermark.text, font=font)
         )
-        x = self._place(
-            position.anchor in _LEFT,
-            position.anchor in _RIGHT,
-            size[0],
-            right - left,
-            position.margin,
-        )
-        y = self._place(
-            position.anchor in _TOP,
-            position.anchor in _BOTTOM,
-            size[1],
-            bottom - top,
-            position.margin,
-        )
+        x, y = self._origin(size, (right - left, bottom - top), position)
         draw.text(
             (x - left, y - top),
             watermark.text,
@@ -82,6 +73,40 @@ class PillowWatermarkRenderer:
             fill=(red, green, blue, _FULL_ALPHA),
         )
         return self._fade(layer, watermark.opacity)
+
+    def _draw_logo(
+        self, size: tuple[int, int], watermark: LogoWatermark, position: Position
+    ) -> PillowImage.Image:
+        logo = watermark.logo
+        source = PillowImage.frombytes(
+            constants.PIXEL_MODE, (logo.width, logo.height), logo.pixels
+        )
+        width = max(
+            1, round(size[0] * watermark.scale_percent / constants.MAX_LOGO_SCALE)
+        )
+        height = max(1, round(logo.height * width / logo.width))
+        scaled = self._fade(
+            source.resize((width, height), PillowImage.Resampling.LANCZOS),
+            watermark.opacity,
+        )
+        layer = PillowImage.new(constants.PIXEL_MODE, size, (0, 0, 0, 0))
+        # Paste replaces the layer pixels, alpha included; the blend with the
+        # picture happens once in render.
+        layer.paste(scaled, self._origin(size, (width, height), position))
+        return layer
+
+    def _origin(
+        self, size: tuple[int, int], extent: tuple[int, int], position: Position
+    ) -> tuple[int, int]:
+        """@brief Top left corner of a box of the given extent at the position."""
+        anchor = position.anchor
+        x = self._place(
+            anchor in _LEFT, anchor in _RIGHT, size[0], extent[0], position.margin
+        )
+        y = self._place(
+            anchor in _TOP, anchor in _BOTTOM, size[1], extent[1], position.margin
+        )
+        return x, y
 
     def _place(
         self, at_start: bool, at_end: bool, room: int, extent: int, margin: int

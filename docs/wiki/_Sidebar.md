@@ -4,6 +4,7 @@
 - [Setup](Setup)
 - [Step 1: upload](Step-1-Upload)
 - [Step 2: text watermark](Step-2-Text-Watermark)
+- [Step 3: logo watermark](Step-3-Logo-Watermark)
 
 **Languages**
 

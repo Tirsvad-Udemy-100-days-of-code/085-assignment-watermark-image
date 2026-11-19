@@ -27,7 +27,7 @@ The wireframe of the main window of use case UC-001. The Product Owner gave no w
 +--------------------------------------------------------------+
 ```
 
-The logo controls and the text controls are shown together in step 3; in step 2 only the text controls exist. The place buttons are the nine places of the use case; the selected one is highlighted.
+The button `Choose..` reads "Choose logo" and the chosen file name is shown beside it. The logo controls and the text controls are shown together in step 3; in step 2 only the text controls exist. The place buttons are the nine places of the use case; the selected one is highlighted.
 
 ## States
 

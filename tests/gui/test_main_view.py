@@ -1,11 +1,12 @@
 """Graphical tests of the MainView; they run only in the Docker harness."""
 
+import math
 import os
 from pathlib import Path
 
 import pytest
 from PIL import Image as PillowImage
-from PIL import ImageGrab
+from PIL import ImageDraw, ImageGrab
 
 from watermark_image.domain.anchor import Anchor
 from watermark_image.infrastructure.composition import CompositionRoot
@@ -14,6 +15,7 @@ from watermark_image.presentation.main_view import MainView
 pytestmark = pytest.mark.gui
 
 SAMPLE_SIZE = (1200, 800)
+LOGO_SIZE = 200
 
 
 def make_gradient(path: Path) -> None:
@@ -27,6 +29,24 @@ def make_gradient(path: Path) -> None:
         ]
     )
     picture.save(path)
+
+
+def make_logo(path: Path) -> None:
+    """A blue circle with a white star on a transparent background."""
+    size = LOGO_SIZE
+    emblem = PillowImage.new("RGBA", (size, size), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(emblem)
+    draw.ellipse((4, 4, size - 5, size - 5), fill=(220, 40, 40, 255))
+    centre = size / 2
+    points = []
+    for index in range(10):
+        radius = size * 0.38 if index % 2 == 0 else size * 0.16
+        angle = math.pi * index / 5 - math.pi / 2
+        points.append(
+            (centre + radius * math.cos(angle), centre + radius * math.sin(angle))
+        )
+    draw.polygon(points, fill=(255, 255, 255, 255))
+    emblem.save(path)
 
 
 def screenshot(view: MainView, name: str) -> Path:
@@ -71,5 +91,23 @@ def test_main_view_shows_the_empty_the_loaded_and_the_watermarked_state(
         view._opacity.set(70)
         assert view_model.status == "Text watermark added"
         assert screenshot(view, "step-2-placed.png").exists()
+
+        logo = tmp_path / "emblem.png"
+        make_logo(logo)
+        view_model.upload_image(sample)
+        view.refresh()
+        view._type.set("Logo")
+        view_model.choose_logo(logo)
+        view._scale.set(25)
+        view._place_buttons[Anchor.TOP_LEFT].invoke()
+        view._opacity.set(100)
+        view._add_button.invoke()
+        assert view_model.status == "Logo watermark added"
+        assert screenshot(view, "step-3-logo.png").exists()
+
+        view._place_buttons[Anchor.BOTTOM_RIGHT].invoke()
+        view._opacity.set(70)
+        assert view_model.status == "Logo watermark added"
+        assert screenshot(view, "step-3-placed.png").exists()
     finally:
         view.window.destroy()
