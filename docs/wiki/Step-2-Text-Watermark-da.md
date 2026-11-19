@@ -30,4 +30,4 @@ Upload et billede, skriv en tekst, tryk på **Add watermark**, og skift placerin
 - **Ni steder ud fra én regel.** Stedet er en enkel opregning; afstanden til kanten er én konstant, og hjørneregnestykket findes ét sted og testes for alle ni steder.
 - **En anden port.** `WatermarkRenderer` er en port som `ImageReader`: brugsfaldet testes med en falsk afløser, og Pillow-tegningen testes mod kendte pixels.
 
-Næste: [Trin 3](Home-da) tilføjer et logovandmærke.
+Næste: [Trin 3](Step-3-Logo-Watermark-da) tilføjer et logovandmærke.

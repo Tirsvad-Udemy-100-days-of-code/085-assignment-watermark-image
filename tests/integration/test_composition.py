@@ -108,3 +108,53 @@ def test_built_view_model_refuses_an_unreadable_logo(tmp_path: Path) -> None:
     )
     assert view_model.status == "Not a readable image"
     assert view_model.preview is plain
+
+
+def test_built_view_model_saves_the_watermarked_picture(tmp_path: Path) -> None:
+    path = tmp_path / "pic.png"
+    PillowImage.new("RGB", (200, 100)).save(path)
+    original_bytes = path.read_bytes()
+    view_model = CompositionRoot().build_view_model()
+    view_model.upload_image(path)
+    assert not view_model.can_save
+    view_model.add_watermark(
+        WatermarkRequest(
+            text="Sample",
+            font_size=32,
+            colour="#ffffff",
+            anchor=Anchor.BOTTOM_RIGHT,
+            opacity=100,
+        )
+    )
+    assert view_model.can_save
+    marked_preview = view_model.preview
+    target = tmp_path / "saved.png"
+    view_model.save_image(target)
+    assert view_model.status == "Saved saved.png"
+    assert view_model.preview is marked_preview
+    with PillowImage.open(target) as saved:
+        pixels = saved.convert("RGBA").tobytes()
+    assert marked_preview is not None
+    assert pixels == marked_preview.pixels
+    assert any(pixels[i : i + 3] != b"\x00\x00\x00" for i in range(0, len(pixels), 4))
+    assert path.read_bytes() == original_bytes
+
+
+def test_built_view_model_refuses_to_overwrite_the_original(tmp_path: Path) -> None:
+    path = tmp_path / "pic.png"
+    PillowImage.new("RGB", (200, 100)).save(path)
+    original_bytes = path.read_bytes()
+    view_model = CompositionRoot().build_view_model()
+    view_model.upload_image(path)
+    view_model.add_watermark(
+        WatermarkRequest(
+            text="Sample",
+            font_size=32,
+            colour="#ffffff",
+            anchor=Anchor.CENTER,
+            opacity=100,
+        )
+    )
+    view_model.save_image(tmp_path / "." / "pic.png")
+    assert view_model.status == "Refused: it is the original file"
+    assert path.read_bytes() == original_bytes

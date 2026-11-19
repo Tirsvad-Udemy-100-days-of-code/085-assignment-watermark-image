@@ -3,9 +3,11 @@
 """
 
 from watermark_image.application.add_watermark import AddWatermark
+from watermark_image.application.save_image import SaveImage
 from watermark_image.application.upload_image import UploadImage
 from watermark_image.application.workspace import Workspace
 from watermark_image.infrastructure.pillow_image_reader import PillowImageReader
+from watermark_image.infrastructure.pillow_image_writer import PillowImageWriter
 from watermark_image.infrastructure.pillow_watermark_renderer import (
     PillowWatermarkRenderer,
 )
@@ -24,4 +26,5 @@ class CompositionRoot:
         reader = PillowImageReader()
         upload = UploadImage(reader, workspace)
         add = AddWatermark(reader, PillowWatermarkRenderer(), workspace)
-        return MainViewModel(upload, add)
+        save = SaveImage(PillowImageWriter(), workspace)
+        return MainViewModel(upload, add, save)

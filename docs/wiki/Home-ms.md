@@ -10,7 +10,6 @@ Aplikasi desktop kecil yang memuat naik imej, menambah watermark teks atau logo 
 | [Langkah 1: muat naik](Step-1-Upload-ms) | melihat tetingkap dan muat naik imej |
 | [Langkah 2: watermark teks](Step-2-Text-Watermark-ms) | menambah watermark teks dengan kedudukan dan kelegapan |
 | [Langkah 3: watermark logo](Step-3-Logo-Watermark-ms) | menggunakan gambar sebagai watermark |
-
-Halaman langkah ditambah apabila setiap langkah siap.
+| [Langkah 4: simpan](Step-4-Save-ms) | menyimpan hasil tanpa menyentuh fail asal |
 
 Kod sumber, fail README dan dokumen projek berada dalam repositori.

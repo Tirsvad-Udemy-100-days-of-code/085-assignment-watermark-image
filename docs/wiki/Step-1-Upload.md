@@ -30,4 +30,4 @@ Press **Upload image**, choose a picture file and watch the preview and the stat
 - **Why Pillow.** Tkinter alone cannot read JPEG files, so Pillow reads the file and converts it to plain RGBA bytes that the rest of the program uses.
 - **A graphical test that never takes your mouse.** The screenshots above were made in a Linux container with a virtual display, not on the desktop.
 
-Next: [Step 2](Home) adds a text watermark.
+Next: [Step 2](Step-2-Text-Watermark) adds a text watermark.

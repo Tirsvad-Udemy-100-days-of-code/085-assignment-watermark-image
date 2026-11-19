@@ -30,4 +30,4 @@ Upload a picture, choose **Logo**, choose a logo file (a PNG with a transparent 
 - **One placement rule.** The nine places and the margin are computed in one function that the text and the logo both use.
 - **Reusing a port.** The logo file is read through the same `ImageReader` port as the picture, so it gets the same error handling and the same tests with a fake.
 
-Next: [Step 4](Home) saves the result.
+Next: [Step 4](Step-4-Save) saves the result.

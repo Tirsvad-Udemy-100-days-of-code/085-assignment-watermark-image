@@ -176,3 +176,33 @@ LOGO_DIALOG_TITLE: Final[str] = "Choose logo"
 
 ## @brief Caption of the logo scale control.
 SCALE_LABEL: Final[str] = "Scale:"
+
+## @brief Background a transparent picture is laid on when saved as JPEG (RGBA white).
+JPEG_BACKGROUND: Final[tuple[int, int, int, int]] = (255, 255, 255, 255)
+
+## @brief Status line text after a save; `{name}` is the file name.
+STATUS_SAVED: Final[str] = "Saved {name}"
+
+## @brief Reason shown when a save is asked before a watermark is added.
+ERROR_NO_MARKED_IMAGE: Final[str] = "Add a watermark first"
+
+## @brief Reason shown when the save target is the file the picture came from.
+ERROR_OVERWRITE_ORIGINAL: Final[str] = "Refused: it is the original file"
+
+## @brief Reason shown when the file ending is not one the application can save.
+ERROR_UNSUPPORTED_ENDING: Final[str] = "Save as .png, .jpg or .jpeg"
+
+## @brief Reason shown when the file cannot be written.
+ERROR_NOT_WRITABLE: Final[str] = "The file cannot be written"
+
+## @brief Title of the dialog that asks for the file to save to.
+SAVE_DIALOG_TITLE: Final[str] = "Save image"
+
+## @brief Ending the save dialog adds when the user types none.
+DEFAULT_SAVE_EXTENSION: Final[str] = ".png"
+
+## @brief Name of the PNG type group in the save dialog.
+PNG_FILES_LABEL: Final[str] = "PNG image"
+
+## @brief Name of the JPEG type group in the save dialog.
+JPEG_FILES_LABEL: Final[str] = "JPEG image"

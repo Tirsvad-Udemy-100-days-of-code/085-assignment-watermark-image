@@ -30,4 +30,4 @@ Muat naik gambar, taip teks, tekan **Add watermark** dan tukar tempat atau keleg
 - **Sembilan tempat daripada satu peraturan.** Tempat ialah enum ringkas; jarak dari tepi ialah satu pemalar, dan pengiraan sudut berada di satu tempat yang diuji untuk kesemua sembilan tempat.
 - **Port kedua.** `WatermarkRenderer` ialah port seperti `ImageReader`: kes guna diuji dengan pengganti palsu, dan lukisan Pillow diuji dengan piksel yang diketahui.
 
-Seterusnya: [Langkah 3](Home-ms) menambah watermark logo.
+Seterusnya: [Langkah 3](Step-3-Logo-Watermark-ms) menambah watermark logo.

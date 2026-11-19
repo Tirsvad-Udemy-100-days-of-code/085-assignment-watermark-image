@@ -30,4 +30,4 @@ Tekan **Upload image**, pilih fail gambar dan lihat pratonton serta baris status
 - **Mengapa Pillow.** Tkinter sahaja tidak dapat membaca fail JPEG, jadi Pillow membaca fail dan menukarnya kepada bait RGBA biasa yang digunakan oleh seluruh program.
 - **Ujian grafik yang tidak pernah mengambil tetikus anda.** Tangkapan skrin di atas dibuat dalam bekas Linux dengan paparan maya, bukan pada desktop.
 
-Seterusnya: [Langkah 2](Home-ms) menambah watermark teks.
+Seterusnya: [Langkah 2](Step-2-Text-Watermark-ms) menambah watermark teks.

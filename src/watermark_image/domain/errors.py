@@ -9,3 +9,7 @@ class DomainError(Exception):
 
 class InvalidWatermarkError(DomainError):
     """@brief A watermark or its position holds a value the rules refuse."""
+
+
+class OverwriteOriginalError(DomainError):
+    """@brief A save target names the file the Image came from."""

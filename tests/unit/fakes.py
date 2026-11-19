@@ -109,3 +109,30 @@ class FakeWatermarkRenderer:
         return WatermarkedImage(
             image, watermark, position, image.width, image.height, pixels
         )
+
+
+class FakeImageWriter:
+    """@brief An ImageWriter that records its calls or raises an error."""
+
+    def __init__(self, error: Exception | None = None) -> None:
+        self._error = error
+        self.calls: list[tuple[WatermarkedImage, Path]] = []
+
+    def write(self, marked: WatermarkedImage, target: Path) -> None:
+        """@brief Record the call, or raise the prepared error."""
+        if self._error is not None:
+            raise self._error
+        self.calls.append((marked, target))
+
+
+def make_marked(source: str = "photo.png") -> WatermarkedImage:
+    """@brief Build a valid WatermarkedImage of an Image from the source."""
+    image = make_image(source)
+    return WatermarkedImage(
+        image,
+        make_text_watermark(),
+        Position(Anchor.CENTER, constants.DEFAULT_MARGIN),
+        image.width,
+        image.height,
+        image.pixels,
+    )

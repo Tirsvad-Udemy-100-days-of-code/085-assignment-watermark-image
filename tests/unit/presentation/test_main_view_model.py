@@ -6,23 +6,28 @@ import pytest
 
 from tests.unit.fakes import (
     FakeImageReader,
+    FakeImageWriter,
     FakeWatermarkRenderer,
     make_image,
     make_logo_request,
     make_request,
 )
 from watermark_image.application.add_watermark import AddWatermark
-from watermark_image.application.errors import ImageReadError
+from watermark_image.application.errors import ImageReadError, ImageWriteError
+from watermark_image.application.save_image import SaveImage
 from watermark_image.application.upload_image import UploadImage
 from watermark_image.application.workspace import Workspace
 from watermark_image.presentation.main_view_model import MainViewModel
 
 
-def make_view_model(reader: FakeImageReader) -> MainViewModel:
+def make_view_model(
+    reader: FakeImageReader, writer: FakeImageWriter | None = None
+) -> MainViewModel:
     workspace = Workspace()
     return MainViewModel(
         UploadImage(reader, workspace),
         AddWatermark(reader, FakeWatermarkRenderer(), workspace),
+        SaveImage(writer or FakeImageWriter(), workspace),
     )
 
 
@@ -83,9 +88,54 @@ def test_add_watermark_shows_the_marked_picture() -> None:
     assert view_model.has_watermark
 
 
-def test_add_watermark_keeps_saving_disabled() -> None:
+def test_add_watermark_enables_saving() -> None:
     view_model = loaded_view_model()
     view_model.add_watermark(make_request())
+    assert view_model.can_save
+
+
+def marked_view_model(writer: FakeImageWriter) -> MainViewModel:
+    view_model = make_view_model(FakeImageReader(make_image(width=4, height=2)), writer)
+    view_model.upload_image(Path("a.png"))
+    view_model.add_watermark(make_request())
+    return view_model
+
+
+def test_save_image_reports_the_file_name_and_keeps_the_preview() -> None:
+    writer = FakeImageWriter()
+    view_model = marked_view_model(writer)
+    shown = view_model.preview
+    view_model.save_image(Path("dir") / "out.png")
+    assert view_model.status == "Saved out.png"
+    assert view_model.preview is shown
+    assert len(writer.calls) == 1
+    assert view_model.can_save
+
+
+def test_save_image_without_a_watermark_says_so() -> None:
+    view_model = loaded_view_model()
+    view_model.save_image(Path("out.png"))
+    assert view_model.status == "Add a watermark first"
+
+
+def test_save_image_refuses_the_original() -> None:
+    writer = FakeImageWriter()
+    view_model = marked_view_model(writer)
+    view_model.save_image(Path("photo.png"))
+    assert view_model.status == "Refused: it is the original file"
+    assert writer.calls == []
+
+
+def test_save_image_shows_the_reason_when_writing_fails() -> None:
+    view_model = marked_view_model(FakeImageWriter(error=ImageWriteError("Disk full")))
+    view_model.save_image(Path("out.png"))
+    assert view_model.status == "Disk full"
+    assert view_model.can_save
+
+
+def test_upload_after_a_watermark_disables_saving() -> None:
+    view_model = marked_view_model(FakeImageWriter())
+    view_model.upload_image(Path("b.png"))
     assert not view_model.can_save
 
 

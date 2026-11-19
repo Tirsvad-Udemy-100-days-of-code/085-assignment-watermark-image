@@ -109,5 +109,23 @@ def test_main_view_shows_the_empty_the_loaded_and_the_watermarked_state(
         view._opacity.set(70)
         assert view_model.status == "Logo watermark added"
         assert screenshot(view, "step-3-placed.png").exists()
+
+        view_model.upload_image(sample)
+        view.refresh()
+        view._type.set("Text")
+        view._text.set("Sample watermark")
+        view._place_buttons[Anchor.BOTTOM_RIGHT].invoke()
+        view._opacity.set(70)
+        view._add_button.invoke()
+        assert view_model.can_save
+        assert str(view._save_button["state"]) == "normal"
+        assert screenshot(view, "step-4-save.png").exists()
+
+        saved = tmp_path / "saved.png"
+        view_model.save_image(saved)
+        view.refresh()
+        assert view_model.status == "Saved saved.png"
+        assert saved.exists()
+        assert screenshot(view, "step-4-saved.png").exists()
     finally:
         view.window.destroy()

@@ -6,24 +6,32 @@ from pathlib import Path
 
 from watermark_image import constants
 from watermark_image.application.add_watermark import AddWatermark
-from watermark_image.application.errors import ImageReadError, NoImageError
+from watermark_image.application.errors import (
+    ImageReadError,
+    ImageWriteError,
+    NoImageError,
+    NoMarkedImageError,
+)
 from watermark_image.application.image_view import ImageView
+from watermark_image.application.save_image import SaveImage
 from watermark_image.application.upload_image import UploadImage
 from watermark_image.application.watermark_request import WatermarkRequest
-from watermark_image.domain.errors import InvalidWatermarkError
+from watermark_image.domain.errors import InvalidWatermarkError, OverwriteOriginalError
 
 
 class MainViewModel:
     """@brief Holds the state of the window and forwards its commands."""
 
-    def __init__(self, upload: UploadImage, add: AddWatermark) -> None:
+    def __init__(self, upload: UploadImage, add: AddWatermark, save: SaveImage) -> None:
         """@brief Build the view model.
 
         @param upload The use case that uploads a picture.
         @param add The use case that adds a watermark.
+        @param save The use case that saves the watermarked picture.
         """
         self._upload = upload
         self._add = add
+        self._save = save
         self.has_watermark: bool = False
         self.use_logo: bool = False
         self.logo_source: Path | None = None
@@ -37,8 +45,8 @@ class MainViewModel:
 
     @property
     def can_save(self) -> bool:
-        """@brief True when a watermarked picture exists; false until saving arrives."""
-        return False
+        """@brief True when a watermarked picture exists and can be saved."""
+        return self.has_watermark
 
     def upload_image(self, source: Path) -> None:
         """@brief Load a picture; a failure goes to the status line.
@@ -81,3 +89,15 @@ class MainViewModel:
                 if request.logo_source is None
                 else constants.STATUS_LOGO_ADDED
             )
+
+    def save_image(self, target: Path) -> None:
+        """@brief Save the watermarked picture; the outcome goes to the status line.
+
+        @param target The file to create. The preview is not changed.
+        """
+        try:
+            confirmation = self._save.execute(target)
+        except (OverwriteOriginalError, NoMarkedImageError, ImageWriteError) as error:
+            self.status = str(error)
+        else:
+            self.status = constants.STATUS_SAVED.format(name=confirmation.target.name)

@@ -9,7 +9,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-025 | [2a87378] |
+| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-025 | [2a87378] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 6: the image is a field of the marked picture; paths compared resolved<br>Accepted on Go in RC-037 | [1f65014] |
 
 ---
 
@@ -187,7 +188,7 @@ alt no WatermarkedImage
   SaveImage --> MainViewModel : NoMarkedImageError
 else WatermarkedImage exists
   Workspace --> SaveImage : WatermarkedImage
-  SaveImage -> WatermarkedImage : image()
+  SaveImage -> WatermarkedImage : read field image
   WatermarkedImage --> SaveImage : Image
   SaveImage -> Image : is_source(target)
   alt target is the original file
@@ -214,7 +215,7 @@ deactivate SaveImage
 
 | Pattern (GRASP/GoF) | Applied to | Rationale |
 | --- | --- | --- |
-| Information Expert (GRASP) | Image answers `is_source` | It knows where it came from |
+| Information Expert (GRASP) | Image answers `is_source` | It knows where it came from; paths are compared in resolved form |
 | Port and adapter (Hexagonal) | ImageWriter, PillowImageWriter | The Application layer does not import the picture library |
 | Protected Variations (GRASP) | ImageWriter port | A new file format changes only the adapter |
 
@@ -238,3 +239,4 @@ deactivate SaveImage
 [DICT-001]: ../../dictionary.md
 [SA-001]: ../../stakeholder-analysis.md
 [2a87378]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/2a87378078601878cb390c2d31581159df822d6f
+[1f65014]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/1f65014ef092535eb0a994f618cc348d58dbd97a
