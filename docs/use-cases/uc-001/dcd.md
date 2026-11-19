@@ -9,8 +9,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Initial version<br>Accepted on Go in RC-026 | [2a87378] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 3: PreviewImage.scale_to_fit, MainView.window and refresh, composition root import<br>Accepted on Go in RC-029 | [05ac937] |
+| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 3: PreviewImage.scale_to_fit, MainView.window and refresh, composition root import<br>Accepted on Go in RC-029 | [05ac937] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 4: scale_to_fit result, has_watermark, margin rule, keyword request<br>Accepted on Go in RC-032 | [a0915f0] |
 
 ---
 
@@ -143,6 +143,7 @@ package "Presentation" #FADADD {
     +preview : ImageView
     +can_add : bool
     +can_save : bool
+    +has_watermark : bool
     +upload_image(source : Path) : None
     +add_watermark(request : WatermarkRequest) : None
     +save_image(target : Path) : None
@@ -154,7 +155,7 @@ package "Presentation" #FADADD {
     +run() : None
   }
   class PreviewImage {
-    +scale_to_fit(view : ImageView) : ImageView
+    +scale_to_fit(view : ImageView) : PillowImage
     +to_photo_image(view : ImageView) : PhotoImage
   }
 }
@@ -206,7 +207,7 @@ Package dependencies: Presentation depends on Application and Domain; Infrastruc
 | --- | --- | --- | --- | --- |
 | Anchor | Place | Names the nine places on a picture | nine members | none |
 | Image | Picture | Holds a loaded picture and tells whether a file is its source | source, width, height, pixels | `is_source` |
-| Position | Placement | Holds where a watermark sits and the margin from the edge | anchor, margin | none |
+| Position | Placement | Holds where a watermark sits and the margin from the edge, which is never negative | anchor, margin | none |
 | Watermark | Watermark | Holds the visibility shared by every watermark and refuses a value outside 0 to 100 | opacity | none |
 | TextWatermark | Text mark | Holds words, size and colour and refuses empty text or a size below 1 | text, font_size, colour | none |
 | LogoWatermark | Logo mark | Holds a logo Image and its size and refuses a size outside 1 to 100 | logo, scale_percent | none |
@@ -214,12 +215,12 @@ Package dependencies: Presentation depends on Application and Domain; Infrastruc
 | DomainError, InvalidWatermarkError, OverwriteOriginalError | none (technical classes: error types) | Signal a refused value or a refused target | none | none |
 | ImageReader, WatermarkRenderer, ImageWriter | none (technical classes: ports) | State what the use cases need from the outside | none | `read`, `render`, `write` |
 | Workspace | none (technical class: holder of the current state) | Keeps the current Image and WatermarkedImage | image, marked | `current_image`, `current_marked`, `replace_image`, `replace_marked` |
-| WatermarkRequest, ImageView, Confirmation | none (technical classes: data transfer objects) | Carry the input and the result between layers | see diagram | none |
+| WatermarkRequest, ImageView, Confirmation | none (technical classes: data transfer objects) | Carry the input and the result between layers; WatermarkRequest is built with keywords | see diagram | none |
 | UploadImage, AddWatermark, SaveImage | none (technical classes: use cases) | Carry out one system operation each | the ports and the Workspace they use | `execute` |
 | ApplicationError and its four kinds | none (technical classes: error types) | Signal a refused operation | none | none |
 | PillowImageReader, PillowWatermarkRenderer, PillowImageWriter | none (technical classes: adapters) | Read, draw and write pictures with the picture library | none | `read`, `render`, `write` |
 | CompositionRoot | none (technical class) | Builds the objects and joins ports to adapters | none | `build_view_model` |
-| MainViewModel | none (technical class: view model) | Holds what the window shows and forwards the three operations | status, preview, can_add, can_save | `upload_image`, `add_watermark`, `save_image` |
+| MainViewModel | none (technical class: view model) | Holds what the window shows and forwards the three operations | status, preview, can_add, can_save, has_watermark | `upload_image`, `add_watermark`, `save_image` |
 | MainView | none (technical class: window) | Draws the window of the wireframe and forwards input | view_model, window | `refresh`, `run` |
 | PreviewImage | none (technical class: helper) | Turns an ImageView into a picture the window can draw, scaled to fit | none | `scale_to_fit`, `to_photo_image` |
 
@@ -271,3 +272,4 @@ No class or package depends on itself, directly or through others. Every depende
 [OC-001]: ./oc.md
 [2a87378]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/2a87378078601878cb390c2d31581159df822d6f
 [05ac937]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/05ac937057e51bc75db7351de9a9f6d67c274724
+[a0915f0]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/a0915f0a2784530fcfc408f2ec0b3c8e8bbb480d

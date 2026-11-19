@@ -8,6 +8,7 @@ Et lille desktopprogram, der uploader et billede, tilføjer et tekst- eller logo
 | --- | --- |
 | [Opsætning](Setup-da) | oprette et lokalt `.venv`, installere projektet og køre programmet og testene |
 | [Trin 1: upload](Step-1-Upload-da) | se vinduet og upload af billedet |
+| [Trin 2: tekstvandmærke](Step-2-Text-Watermark-da) | tilføje et tekstvandmærke med placering og synlighed |
 
 Trinsiderne tilføjes, efterhånden som hvert trin er færdigt.
 

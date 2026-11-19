@@ -5,3 +5,7 @@
 
 class DomainError(Exception):
     """@brief Base class of every error the domain raises."""
+
+
+class InvalidWatermarkError(DomainError):
+    """@brief A watermark or its position holds a value the rules refuse."""

@@ -1,6 +1,7 @@
 """Tests of the shared constants."""
 
 from watermark_image import constants
+from watermark_image.domain.anchor import Anchor
 
 
 def test_read_extensions_are_lower_case_with_a_dot() -> None:
@@ -29,3 +30,8 @@ def test_default_logo_scale_lies_between_the_limits() -> None:
 
 def test_default_font_size_is_not_below_the_minimum() -> None:
     assert constants.DEFAULT_FONT_SIZE >= constants.MIN_FONT_SIZE
+
+
+def test_there_is_one_place_caption_per_anchor() -> None:
+    assert len(constants.PLACE_CAPTIONS) == len(Anchor)
+    assert len(Anchor) == constants.PLACE_GRID_COLUMNS**2

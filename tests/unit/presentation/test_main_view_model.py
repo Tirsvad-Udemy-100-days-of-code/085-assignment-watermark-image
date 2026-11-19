@@ -2,7 +2,15 @@
 
 from pathlib import Path
 
-from tests.unit.fakes import FakeImageReader, make_image
+import pytest
+
+from tests.unit.fakes import (
+    FakeImageReader,
+    FakeWatermarkRenderer,
+    make_image,
+    make_request,
+)
+from watermark_image.application.add_watermark import AddWatermark
 from watermark_image.application.errors import ImageReadError
 from watermark_image.application.upload_image import UploadImage
 from watermark_image.application.workspace import Workspace
@@ -10,7 +18,11 @@ from watermark_image.presentation.main_view_model import MainViewModel
 
 
 def make_view_model(reader: FakeImageReader) -> MainViewModel:
-    return MainViewModel(UploadImage(reader, Workspace()))
+    workspace = Workspace()
+    return MainViewModel(
+        UploadImage(reader, workspace),
+        AddWatermark(FakeWatermarkRenderer(), workspace),
+    )
 
 
 def test_new_view_model_is_empty() -> None:
@@ -45,12 +57,68 @@ def test_failed_upload_keeps_the_earlier_preview() -> None:
     view_model = make_view_model(FakeImageReader(good))
     view_model.upload_image(Path("a.png"))
     first = view_model.preview
-    failing = MainViewModel(
-        UploadImage(
-            FakeImageReader(error=ImageReadError("Not a readable image")), Workspace()
-        )
+    failing = make_view_model(
+        FakeImageReader(error=ImageReadError("Not a readable image"))
     )
     failing.preview = first
     failing.upload_image(Path("bad.png"))
     assert failing.preview is first
     assert failing.status == "Not a readable image"
+
+
+def loaded_view_model() -> MainViewModel:
+    view_model = make_view_model(FakeImageReader(make_image(width=4, height=2)))
+    view_model.upload_image(Path("a.png"))
+    return view_model
+
+
+def test_add_watermark_shows_the_marked_picture() -> None:
+    view_model = loaded_view_model()
+    plain = view_model.preview
+    view_model.add_watermark(make_request())
+    assert view_model.status == "Text watermark added"
+    assert view_model.preview is not None
+    assert view_model.preview != plain
+    assert view_model.has_watermark
+
+
+def test_add_watermark_keeps_saving_disabled() -> None:
+    view_model = loaded_view_model()
+    view_model.add_watermark(make_request())
+    assert not view_model.can_save
+
+
+def test_add_watermark_without_a_picture_asks_for_an_upload() -> None:
+    view_model = make_view_model(FakeImageReader(make_image()))
+    view_model.add_watermark(make_request())
+    assert view_model.status == "Upload an image first"
+    assert view_model.preview is None
+    assert not view_model.has_watermark
+
+
+@pytest.mark.parametrize(
+    ("values", "message"),
+    [
+        ({"text": ""}, "The text must not be empty"),
+        ({"font_size": 0}, "The font size must be at least 1"),
+        ({"colour": "red"}, "The colour must look like #rrggbb"),
+        ({"opacity": 101}, "Opacity must be from 0 to 100"),
+    ],
+)
+def test_add_watermark_shows_the_reason_and_keeps_the_preview(
+    values: dict[str, object], message: str
+) -> None:
+    view_model = loaded_view_model()
+    view_model.add_watermark(make_request())
+    marked = view_model.preview
+    view_model.add_watermark(make_request(**values))  # type: ignore[arg-type]
+    assert view_model.status == message
+    assert view_model.preview is marked
+    assert view_model.has_watermark
+
+
+def test_upload_after_a_watermark_clears_the_watermark_flag() -> None:
+    view_model = loaded_view_model()
+    view_model.add_watermark(make_request())
+    view_model.upload_image(Path("b.png"))
+    assert not view_model.has_watermark
