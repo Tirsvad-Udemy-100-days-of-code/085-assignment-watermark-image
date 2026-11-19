@@ -4,20 +4,21 @@
 | Key | Value |
 | --- | --- |
 | ID | US-001 |
-| CrossReference | [BC-001], [MIL-003], [MIL-004], [MIL-005], [MIL-006] |
+| CrossReference | [BC-001], [MIL-003], [MIL-004], [MIL-005], [MIL-006], [UCD-001], [UC-001] |
 | Language | en |
 | Domain | it |
 
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-19 | Proposed | Jens Tirsvad Nielsen | S01 | Initial version | [44b1b5e] |
+| 2026-11-19 | Deprecated | Jens Tirsvad Nielsen | S01 | Initial version | [44b1b5e] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Actors renamed to User as in UCD-001; adds UCD-001 and UC-001 to CrossReference<br>Accepted on Go in RC-018 | [2a87378] |
 
 ---
 
 ## Purpose and Scope
 
-The stories cover the epic "Watermark an image" of [BC-001]: the four build steps of the application, and two stories about reading and running the repository. The actor of the application stories is the user of the program, who is S01 and any participant (S02) who runs the code; the actor is named `User` in the use case diagram that gateway 2 creates. One use case, UC-001, is expected to cover stories US-001.01 to US-001.05. Stories US-001.06 and US-001.07 are not goals of an actor of the system; they stay plain tasks.
+The stories cover the epic "Watermark an image" of [BC-001]: the four build steps of the application, and two stories about reading and running the repository. The actor of the application stories is the user of the program, who is S01 and any participant (S02) who runs the code; the actor is named `User` in [UCD-001]. One use case, UC-001, covers stories US-001.01 to US-001.05. Stories US-001.06 and US-001.07 are not goals of an actor of the system; they stay plain tasks.
 
 ## Story List
 
@@ -91,7 +92,7 @@ The stories cover the epic "Watermark an image" of [BC-001]: the four build step
 
 ### US-001.06 — Run the project from the README
 
-**As a** course participant (S02), **I want** step-by-step instructions to create a local `.venv`, upgrade pip, install, run and test the project, **so that** I can run the solution on my own machine.
+**As a** User (S02 who runs the code), **I want** step-by-step instructions to create a local `.venv`, upgrade pip, install, run and test the project, **so that** I can run the solution on my own machine.
 
 **Acceptance Criteria**
 
@@ -104,7 +105,7 @@ The stories cover the epic "Watermark an image" of [BC-001]: the four build step
 
 ### US-001.07 — Read what each step taught, in my language
 
-**As a** visitor (S03) or participant (S02), **I want** a wiki page for each build step with a screenshot and what the step taught, in English, Danish or Bahasa Malaysia, **so that** I can follow the build and learn from it.
+**As a** User (S02, or S03 who reads the repository), **I want** a wiki page for each build step with a screenshot and what the step taught, in English, Danish or Bahasa Malaysia, **so that** I can follow the build and learn from it.
 
 **Acceptance Criteria**
 
@@ -121,6 +122,8 @@ Independent: US-001.01 is first; US-001.03 depends on US-001.02 and US-001.04 an
 
 ---
 
+[UC-001]: use-cases/uc-001/uc.md
+[UCD-001]: use-case-diagram.md
 [BC-001]: ./business-case.md
 [MIL-001]: ./milestones/mil-001-project-setup.md
 [MIL-003]: ./milestones/mil-003-step-1-upload.md
@@ -128,3 +131,4 @@ Independent: US-001.01 is first; US-001.03 depends on US-001.02 and US-001.04 an
 [MIL-005]: ./milestones/mil-005-step-3-logo-watermark.md
 [MIL-006]: ./milestones/mil-006-step-4-save.md
 [44b1b5e]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/44b1b5e31086612d7f3fdfb7e709507066247e4a
+[2a87378]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/2a87378078601878cb390c2d31581159df822d6f
