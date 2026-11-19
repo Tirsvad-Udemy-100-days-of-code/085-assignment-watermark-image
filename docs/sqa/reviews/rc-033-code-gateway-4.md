@@ -9,7 +9,7 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Review record; mode autonomous, not independent | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Review record; mode autonomous, not independent | [a0915f0] |
 
 ---
 
@@ -59,3 +59,4 @@ Go — every Mandatory criterion passes; no action items
 
 [MIL-004]: ../../milestones/mil-004-step-2-text-watermark.md
 [QC-PY-001]: ../../../framework/qc/code/qc-programming-python.md
+[a0915f0]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/a0915f0a2784530fcfc408f2ec0b3c8e8bbb480d

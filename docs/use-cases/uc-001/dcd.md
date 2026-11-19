@@ -10,7 +10,7 @@
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
 | 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 3: PreviewImage.scale_to_fit, MainView.window and refresh, composition root import<br>Accepted on Go in RC-029 | [05ac937] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 4: scale_to_fit result, has_watermark, margin rule, keyword request<br>Accepted on Go in RC-032 | pending |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Aligned with the code of gateway 4: scale_to_fit result, has_watermark, margin rule, keyword request<br>Accepted on Go in RC-032 | [a0915f0] |
 
 ---
 
@@ -272,3 +272,4 @@ No class or package depends on itself, directly or through others. Every depende
 [OC-001]: ./oc.md
 [2a87378]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/2a87378078601878cb390c2d31581159df822d6f
 [05ac937]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/05ac937057e51bc75db7351de9a9f6d67c274724
+[a0915f0]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/a0915f0a2784530fcfc408f2ec0b3c8e8bbb480d
