@@ -11,6 +11,7 @@ A desktop application that uploads an image, adds a text or logo watermark and s
 - [Step 1: upload](#-step-1-upload)
 - [Step 2: text watermark](#-step-2-text-watermark)
 - [Step 3: logo watermark](#-step-3-logo-watermark)
+- [Step 4: save](#-step-4-save)
 - [Tests](#-tests)
 - [License](#-license)
 - [Links](#-links)
@@ -102,6 +103,14 @@ Choose **Logo** as the watermark type, press **Choose logo**, pick a picture fil
 | --- | --- |
 | ![Step 3: a logo watermark](./docs/screenshots/step-3-logo.png) | ![Step 3: the logo placed in a corner](./docs/screenshots/step-3-placed.png) |
 
+## 💾 Step 4: save
+
+Once a watermark is added, **Save image** opens a save dialog and writes the marked picture to a new `.png`, `.jpg` or `.jpeg` file. Choosing the original file is refused, so the original is never overwritten. The wiki page [Step 4][wiki-step-4] explains what the step taught, in English, Danish and Bahasa Malaysia.
+
+| Ready to save | Saved |
+| --- | --- |
+| ![Step 4: the window ready to save](./docs/screenshots/step-4-save.png) | ![Step 4: the picture saved](./docs/screenshots/step-4-saved.png) |
+
 ## 🧪 Tests
 
 With the environment active:
@@ -157,6 +166,7 @@ The documents a newcomer needs, in reading order.
 [wiki-step-1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Step-1-Upload
 [wiki-step-2]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Step-2-Text-Watermark
 [wiki-step-3]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Step-3-Logo-Watermark
+[wiki-step-4]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Step-4-Save
 [license]: ./LICENSE
 [BC-001]: ./docs/business-case.md
 [SA-001]: ./docs/stakeholder-analysis.md

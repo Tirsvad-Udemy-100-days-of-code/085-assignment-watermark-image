@@ -9,8 +9,8 @@
 ## Version History
 | Date | Status | Author | Reviewer | Change | Commit |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the gateway 4 DCD delta reviews | [a0915f0] |
-| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the gateway 5 DCD delta reviews | [9ce52e1] |
+| 2026-11-20 | Deprecated | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the gateway 5 DCD delta reviews | [9ce52e1] |
+| 2026-11-20 | Accepted | Jens Tirsvad Nielsen | Stand-in for S01 | Last Reviewed updated for the gateway 6 SD delta review | pending |
 
 ---
 
@@ -32,7 +32,7 @@ Tracks backward and forward links between artifact instances so that the cross-a
 | [DICT-001] | DICT | en | it | [DM-002] | [OC-001], [SD-001], [DCD-001] | [RC-023] |
 | [SSD-001] | SSD | en | it | [UC-001] | [OC-001] | [RC-022] |
 | [OC-001] | OC | en | it | [SSD-001], [DM-001], [DICT-001] | [SD-001] | [RC-024] |
-| [SD-001] | SD | en | it | [OC-001] | [DCD-001] | [RC-025] |
+| [SD-001] | SD | en | it | [OC-001] | [DCD-001] | [RC-037] |
 | [DCD-001] | DCD | en | it | [SD-001], [OC-001], [DM-002] | [DCD-002] | [RC-035] |
 | [DCD-002] | DCD | en | it | [DCD-001] | - | [RC-034] |
 | [PP-001] | PP | en | it | [BC-001], [SA-001] | [MIL-001], [MIL-002], [MIL-003], [MIL-004], [MIL-005], [MIL-006] | [RC-003] |
@@ -114,13 +114,12 @@ Tracks backward and forward links between artifact instances so that the cross-a
 [RC-022]: reviews/rc-022-ssd-uc-001.md
 [RC-023]: reviews/rc-023-dictionary.md
 [RC-024]: reviews/rc-024-oc-uc-001.md
-[RC-025]: reviews/rc-025-sd-uc-001.md
 [RC-034]: reviews/rc-034-dcd-project-delta-3.md
 [RC-035]: reviews/rc-035-dcd-uc-001-delta-3.md
+[RC-037]: reviews/rc-037-sd-uc-001-delta.md
 [SA-001]: ../stakeholder-analysis.md
 [SD-001]: ../use-cases/uc-001/sd.md
 [SSD-001]: ../use-cases/uc-001/ssd.md
 [UC-001]: ../use-cases/uc-001/uc.md
 [UCD-001]: ../use-case-diagram.md
 [US-001]: ../user-stories.md
-[9ce52e1]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/commit/9ce52e1b6c4feb3e16dad4630a7bfdd0cfe8eeef

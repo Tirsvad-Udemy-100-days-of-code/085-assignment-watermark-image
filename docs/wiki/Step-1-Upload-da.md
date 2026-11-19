@@ -30,4 +30,4 @@ Tryk på **Upload image**, vælg en billedfil, og se eksemplet og statuslinjen. 
 - **Hvorfor Pillow.** Tkinter kan ikke læse JPEG-filer alene, så Pillow læser filen og laver den om til almindelige RGBA-bytes, som resten af programmet bruger.
 - **En grafisk test, der aldrig tager din mus.** Skærmbillederne ovenfor er lavet i en Linux-container med en virtuel skærm, ikke på skrivebordet.
 
-Næste: [Trin 2](Home-da) tilføjer et tekstvandmærke.
+Næste: [Trin 2](Step-2-Text-Watermark-da) tilføjer et tekstvandmærke.

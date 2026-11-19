@@ -10,7 +10,6 @@ Et lille desktopprogram, der uploader et billede, tilføjer et tekst- eller logo
 | [Trin 1: upload](Step-1-Upload-da) | se vinduet og upload af billedet |
 | [Trin 2: tekstvandmærke](Step-2-Text-Watermark-da) | tilføje et tekstvandmærke med placering og synlighed |
 | [Trin 3: logovandmærke](Step-3-Logo-Watermark-da) | bruge et billede som vandmærke |
-
-Trinsiderne tilføjes, efterhånden som hvert trin er færdigt.
+| [Trin 4: gem](Step-4-Save-da) | gemme resultatet uden at røre originalen |
 
 Kildekoden, README-filen og projektdokumenterne ligger i repositoriet.

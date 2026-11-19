@@ -30,4 +30,4 @@ Upload a picture, type a text, press **Add watermark** and change the place or t
 - **Nine places from one rule.** The place is a plain enum; the margin from the edge is one constant, and the corner arithmetic lives in one function that is tested for all nine places.
 - **A second port.** `WatermarkRenderer` is a port like `ImageReader`: the use case is tested with a fake, and the Pillow drawing is tested against known pixels.
 
-Next: [Step 3](Home) adds a logo watermark.
+Next: [Step 3](Step-3-Logo-Watermark) adds a logo watermark.

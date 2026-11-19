@@ -30,4 +30,4 @@ Muat naik gambar, pilih **Logo**, pilih fail logo (PNG dengan latar belakang lut
 - **Satu peraturan kedudukan.** Sembilan tempat dan jarak dari tepi dikira dalam satu fungsi yang digunakan oleh teks dan logo.
 - **Menggunakan semula port.** Fail logo dibaca melalui port `ImageReader` yang sama seperti gambar, jadi ia mendapat pengendalian ralat dan ujian yang sama dengan pengganti palsu.
 
-Seterusnya: [Langkah 4](Home-ms) menyimpan hasilnya.
+Seterusnya: [Langkah 4](Step-4-Save-ms) menyimpan hasilnya.

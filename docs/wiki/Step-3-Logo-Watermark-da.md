@@ -30,4 +30,4 @@ Upload et billede, vælg **Logo**, vælg en logofil (en PNG med gennemsigtig bag
 - **Én placeringsregel.** De ni steder og afstanden til kanten beregnes i én funktion, som både teksten og logoet bruger.
 - **At genbruge en port.** Logofilen læses gennem den samme `ImageReader`-port som billedet, så den får samme fejlhåndtering og samme test med en falsk afløser.
 
-Næste: [Trin 4](Home-da) gemmer resultatet.
+Næste: [Trin 4](Step-4-Save-da) gemmer resultatet.
