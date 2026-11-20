@@ -24,6 +24,16 @@ python -m pip install -e ".[dev]"
 
 Kommandoen læser `pyproject.toml`. Pillow er den eneste afhængighed ved kørsel; gruppen `dev` tilføjer værktøjerne til test og kontrol.
 
+## Kør programmet
+
+Med miljøet aktivt starter du programmet fra projektmappen:
+
+```powershell
+python -m watermark_image
+```
+
+Et vindue åbnes med knappen **Upload image**. Siderne om trinnene forklarer hvert kontrolelement, begyndende med [Trin 1](Step-1-Upload-da).
+
 ## Kør testene
 
 ```powershell

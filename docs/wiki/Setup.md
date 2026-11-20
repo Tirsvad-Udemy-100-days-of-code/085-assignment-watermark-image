@@ -24,6 +24,16 @@ python -m pip install -e ".[dev]"
 
 The command reads `pyproject.toml`. Pillow is the only runtime dependency; the `dev` group adds the test and check tools.
 
+## Run the application
+
+With the environment active, start the program from the project folder:
+
+```powershell
+python -m watermark_image
+```
+
+A window opens with an **Upload image** button. The steps pages explain each control, starting with [Step 1](Step-1-Upload).
+
 ## Run the tests
 
 ```powershell
