@@ -24,6 +24,16 @@ python -m pip install -e ".[dev]"
 
 Arahan ini membaca `pyproject.toml`. Pillow ialah satu-satunya kebergantungan masa jalan; kumpulan `dev` menambah alat ujian dan semakan.
 
+## Jalankan aplikasi
+
+Dengan persekitaran aktif, mulakan program dari folder projek:
+
+```powershell
+python -m watermark_image
+```
+
+Satu tetingkap dibuka dengan butang **Upload image**. Halaman langkah menerangkan setiap kawalan, bermula dengan [Langkah 1](Step-1-Upload-ms).
+
 ## Jalankan ujian
 
 ```powershell
