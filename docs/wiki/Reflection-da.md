@@ -2,29 +2,20 @@
 
 # Refleksion
 
-Opgaven slutter med en refleksion: hvordan projektet blev grebet an, hvad der var svært og let, og hvad der skal gøres anderledes. Dette er et udkast; Product Owner omskriver det med egne ord.
+Opgaven slutter med en refleksion: hvordan projektet blev grebet an, hvad der var svært og let, og hvad der skal gøres anderledes. Skrevet af Product Owner.
 
 ## Hvordan greb jeg projektet an?
 
-Jeg skrev planen og designet før koden: hvem programmet er til, ét use case (upload, tilføj vandmærke, gem), en domænemodel og et klassediagram. Derefter byggede jeg det i fire trin, én gren og én pull request pr. trin, med et skærmbillede for hvert, så hvert trin kunne kontrolleres for sig.
+Jeg greb projektet an ved at tænke over, hvordan jeg kunne bruge det i en virkelig situation. For eksempel kunne jeg tilføje et logo eller et tekstvandmærke til fotos, der uploades til et websted. Derefter byggede jeg en skrivebordsapp, hvor brugeren kan vælge et billede og tilføje et vandmærke automatisk.
 
-## Hvad var svært?
+## Hvad var let, og hvad var svært?
 
-- **Tkinter alene er ikke nok.** Det kan ikke læse JPEG-filer eller blande et vandmærke med gennemsigtighed, så Pillow blev den ene afhængighed ved kørsel.
-- **At holde vinduet adskilt fra reglerne.** Billedet og vandmærkets regler ligger i lag, der ikke kender Tkinter; vinduet viser dem kun. Det krævede mere omtanke i starten og betalte sig senere.
-- **At teste et vindue.** En grafisk test må ikke overtage skrivebordet, så grafiske tests og skærmbilleder kører i en Linux-container med en virtuel skærm.
-
-## Hvad var let?
-
-- At placere et vandmærke på et af ni steder er almindelig regning, når reglen om margen er skrevet ned.
-- Vandmærkets regler var lette at teste, fordi de ikke kræver et vindue.
+Det letteste var at vælge et billede og vise det i appen. Det sværere var at placere og dimensionere vandmærket, så det ser godt ud på forskellige billeder. Jeg skulle også lære, hvordan Pillow arbejder med billeder, og hvordan Tkinter kan forbinde brugerfladen med koden, der behandler billedet.
 
 ## Hvad var min største læring?
 
-At skrive use casen og kontrakterne først gjorde hvert trin lille og klart. Koden fulgte for det meste designet, og når den ikke gjorde, ændrede jeg designet bevidst og gennemgik det igen.
+Min største læring var, at en lille funktion som at tilføje et vandmærke omfatter flere trin: at vælge en fil, behandle billedet, vise resultatet og gemme det. Jeg kan også se, hvordan funktionen kunne tilpasses et webprojekt, hvor brugere uploader fotos og tilføjer et logo eller et tekstvandmærke.
 
 ## Hvad ville jeg gøre anderledes?
 
-- Starte med beslutningen om Pillow, så den første kode, der læser billeder, skrives én gang.
-- Tage skærmbillederne fra første trin i stedet for at tilføje værktøjet senere.
-- Prøve to vandmærker på samme tid (tekst og logo sammen) og en samling billeder som næste projekt.
+Næste gang ville jeg planlægge trinene før kodningen og teste appen med forskellige billedstørrelser og formater. Jeg ville også forbedre den ved at lade brugerne vælge vandmærkets placering, størrelse og gennemsigtighed.
