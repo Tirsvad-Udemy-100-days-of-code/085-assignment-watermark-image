@@ -2,29 +2,20 @@
 
 # Reflection
 
-The assignment ends with a reflection: how the project was approached, what was hard and easy, and what to do differently. This is a draft; the Product Owner rewrites it in their own words.
+The assignment ends with a reflection: how the project was approached, what was hard and easy, and what to do differently. Written by the Product Owner.
 
 ## How did I approach the project?
 
-I wrote the plan and the design before the code: who the program is for, one use case (upload, add a watermark, save), a domain model and a class diagram. Then I built it in four steps, one branch and one pull request per step, with a screenshot for each, so every step could be checked on its own.
+I approached this project by thinking about how I could use it in a real situation. For example, I could add a logo or text watermark to photos uploaded to a website. Then I built a desktop app that lets the user choose an image and apply a watermark automatically.
 
-## What was hard?
+## What was easy, and what was hard?
 
-- **Tkinter alone is not enough.** It cannot read JPEG files or blend a watermark with transparency, so Pillow became the one runtime dependency.
-- **Keeping the window apart from the rules.** The picture and the watermark rules live in layers that do not know Tkinter; the window only shows them. It took more thought at the start and paid back later.
-- **Testing a window.** A graphical test must not take over the desktop, so graphical tests and screenshots run in a Linux container with a virtual display.
-
-## What was easy?
-
-- Placing a watermark in one of nine places is plain arithmetic once the margin rule is written down.
-- The rules of the watermark were easy to test, because they need no window.
+The easiest part was choosing an image and displaying it in the app. The harder part was positioning and sizing the watermark so it looks good on different images. I also had to learn how Pillow works with images and how Tkinter can connect the interface to the image-processing code.
 
 ## What was my biggest learning?
 
-Writing down the use case and the contracts first made each step small and clear. The code mostly followed the design, and when it did not, I changed the design on purpose and reviewed it again.
+My biggest learning was that a small feature, like adding a watermark, involves several steps: selecting a file, processing the image, previewing the result, and saving it. I can also see how this functionality could be adapted for a web project where users upload photos and add a logo or text watermark.
 
 ## What would I do differently?
 
-- Start with the Pillow decision, so the first picture-reading code is written once.
-- Take the screenshots from the first step on, instead of adding the harness later.
-- Try a second watermark at the same time (text and logo together) and a batch of pictures, as the next project.
+Next time, I would plan the steps before coding and test the app with different image sizes and formats. I would also improve it by letting users choose the watermark's position, size, and transparency.
