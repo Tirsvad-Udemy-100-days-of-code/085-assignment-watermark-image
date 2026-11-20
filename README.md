@@ -12,6 +12,7 @@ A desktop application that uploads an image, adds a text or logo watermark and s
 - [Step 2: text watermark](#-step-2-text-watermark)
 - [Step 3: logo watermark](#-step-3-logo-watermark)
 - [Step 4: save](#-step-4-save)
+- [Reflection](#-reflection)
 - [Tests](#-tests)
 - [License](#-license)
 - [Links](#-links)
@@ -111,6 +112,10 @@ Once a watermark is added, **Save image** opens a save dialog and writes the mar
 | --- | --- |
 | ![Step 4: the window ready to save](./docs/screenshots/step-4-save.png) | ![Step 4: the picture saved](./docs/screenshots/step-4-saved.png) |
 
+## 🪞 Reflection
+
+The assignment ends with a reflection on the approach, what was hard and easy, and what to do differently. The wiki page [Reflection][wiki-reflection] holds a draft, in English, Danish and Bahasa Malaysia.
+
 ## 🧪 Tests
 
 With the environment active:
@@ -142,6 +147,8 @@ GNU Affero General Public License, version 3. See the [LICENSE][license] file.
 - [Repository][repository]
 - [Documentation][documentation]
 - [Issue tracker][issues]
+- [Pillow][pillow] and the [Tkinter documentation][tkinter], the two references of the assignment
+- [Watermarkly][watermarkly], a similar online service
 
 ## 📎 Appendix: Project documents
 
@@ -167,6 +174,10 @@ The documents a newcomer needs, in reading order.
 [wiki-step-2]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Step-2-Text-Watermark
 [wiki-step-3]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Step-3-Logo-Watermark
 [wiki-step-4]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Step-4-Save
+[wiki-reflection]: https://git.tirsystem.com/Tirsvad-Udemy-100-days-of-code/085-assignment-watermark-image/wiki/Reflection
+[pillow]: https://pypi.org/project/Pillow/
+[tkinter]: https://docs.python.org/3/library/tkinter.html
+[watermarkly]: https://watermarkly.com/
 [license]: ./LICENSE
 [BC-001]: ./docs/business-case.md
 [SA-001]: ./docs/stakeholder-analysis.md

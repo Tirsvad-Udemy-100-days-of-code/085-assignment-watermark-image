@@ -11,5 +11,6 @@ A small desktop application that uploads an image, adds a text or logo watermark
 | [Step 2: text watermark](Step-2-Text-Watermark) | add a text watermark with place and opacity |
 | [Step 3: logo watermark](Step-3-Logo-Watermark) | use a picture as the watermark |
 | [Step 4: save](Step-4-Save) | save the result without touching the original |
+| [Reflection](Reflection) | read what was hard, what was easy and what to do differently |
 
 The source, the README and the project documents are in the repository.
